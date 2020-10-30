@@ -16,7 +16,7 @@ const TEXTS = {
   }
 }
 
-
+const banner=require('../images/grass.jpeg')
 const bblack = '#2b2523'
 
 const SubHeader = ({arr, style}) => 
@@ -58,13 +58,14 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
           height:200,
           padding: `1.45rem 1.0875rem`,
           opacity:hover['div']?0.5:1.0,
+          bacgroundImage:hover?banner:undefined,
           //background:hover['h1']?bblack:undefined,
           transition:'500ms all ease'
         }}
         onMouseEnter={()=>handleMouseEnter('div')}
         onMouseLeave={()=>handleMouseLeave('div')}
       >
-        <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'red'}} />
+        <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
         <Link
           to="/"
           className='title'

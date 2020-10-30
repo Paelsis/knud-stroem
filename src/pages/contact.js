@@ -29,21 +29,8 @@ export default () => {
     )}
   </table>
 
-
-  const sendFeedback = (templateId, variables) => {
-    window.emailjs.send(
-      'gmail', templateId,
-      variables
-      ).then(res => {
-        console.log('Email successfully sent!')
-      })
-      // Handle errors here however you like, or use a React error boundary
-      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-  }
-
   const handleSubmit = (event) => {
-    const templateId = 'template_id';
-      this.sendFeedback(templateId, {message_html: body(values), from_name: 'paelsis@hotmail.com',reply_to:'per.eskilson@gmail.com'})
+    alert('Test of handle submit');
   }
 
   const styles = {
@@ -65,7 +52,8 @@ export default () => {
   }
 
   const src = `https://source.unsplash.com/random/600x600`  
-
+  const href = 'mailto:"mailto:knud55@outlook.com?subject=Från min hemsida av ' + values.firstname + ' ' + values.lastname + "&body=" + values.subject + '"'
+ 
 
   return (
     <Layout>
@@ -95,7 +83,10 @@ export default () => {
             <label for="subject">Subject:</label>&nbsp;
             <textarea id="subject" name="subject" placeholder="Write something ..." value={values.subject} style={{...styles.text, height:'170px'}} onChange={handleChange}></textarea>
             <p/>
-            <input style={styles.submit} type="submit" value="Submit"/>
+            &nbsp;
+            <a href={href}>
+              Send mail to me
+            </a>
           </form>
         </div>
       </div>

@@ -1,45 +1,46 @@
-import React from "react"
+import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
+import Image from './Image'
 
-export default class Image extends React.Component {
-    render(){
+export default () => {
+      const [hover, handleHover] = useState(undefined) 
+      const [click, handleClick] = useState(undefined) 
       return (
         <StaticQuery
           query={graphql`
           query {
             allImageSharp {
-              edges {
-                node {
-                  fixed(width: 125, height: 125) {
-                    ...GatsbyImageSharpFixed
-                    originalName
-                  }
-                }
-              }
-            }
-          }
+               edges {
+                 node {
+                   fluid(maxWidth: 800) {
+                      ...GatsbyImageSharpFluid_noBase64
+                      originalName
+                   }
+                 }
+               }
+             }
+           }
           `}
           render={data => {
             return (
-              <div className="columns is-multiline" style={{width:'80vw', marginLeft:'auto', marginRight:'auto'}}>
-              {data.allImageSharp.edges.map(it=>
-                <div className="column is-2" style={{justifyContent:'center'}}>
-                <h4>{it.node.fixed.originalName}</h4>
-                <Img
-                        fixed={it.node.fixed}
-                        objectFit="cover"
-                        objectPosition="50% 50%"
-                        alt=""
-                />
-                </div>
-              )}
+              <div className="columns is-multiline" >
+                 {data.allImageSharp.edges.map(it=>
+                  <div 
+                    className={click===it.node.fluid.originalName?"column is-6 is-12-mobile":"column is-2 is-2 is-6-mobile"} style={{opacity:hover===it.node.fluid.originalName?1.0:1.5, transition:'1000ms all ease'}} 
+                    onMouseEnter={()=>handleHover(it.node.fluid.originalName)}
+                    onMouseLeave={()=>handleHover(undefined)}
+                    onClick={()=>handleClick(click?undefined:it.node.fluid.originalName)}
+                  >
+                    <Img fluid={it.node.fluid} backgroundColor='red'/>
+                    <small>{it.node.fluid.originalName}</small>
+                  </div>
+                )}
               </div>
             )
           }}
         />
       )
-    }
   }
   
 

@@ -2,16 +2,17 @@
 $font-stack: crimson, Work Sans;
 $primary-color: green;
 $ghost-white:#F8F8FF;
+$orange:#FF7034;
 $header-background: pink;
-$title-color:$ghost-white;
+$title-color: $orange;
 $ice-green:rgb(217,243,229);// #2b2523;
 $alice-blue:'#F0F8FF'; 
 $nblack:#111111;
 $bblack:#2b2523;
 $black-blue:#1a1b29; 
 $true-black:#010203;
-$body-background-color:$ice-green;
-$navbar-background-color:$ice-green;
+$body-background-color:$ghost-white;
+$navbar-background-color:$ghost-white;
 $ice-color:light-blue;
 
 @import "~bulma/bulma.sass";
@@ -49,7 +50,6 @@ figure,
 header {
   font-family:$font-stack;
   color: $title-color;
-  background-color: $bblack;
   background-image: url('https://source.unsplash.com/random/400x400');  // url("../images/summer_banner.jpg");
   background-size:cover;
 }
