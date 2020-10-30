@@ -7,12 +7,12 @@ import { auto } from "eol"
 
 const TEXTS = {
   title:{
-    SV:"VI PLOCKAR UPP DET !",
-    EN:"WE PICK IT UP !",
+    SV:"KNUD STRØM - FOTO GALLERI !",
+    EN:"KNUD STROEM - PHOTO GALLERY !",
   },
   subtitleArray:{
-    SV:["Vi sanerar våra hav", "Båtvrak", "Dumpade tunnor"],
-    EN:["We clean up our ocenas", "Boat wreck", "Dumped barrels"],
+    SV:["Jag målar", "dansar tango", "lagar mat"],
+    EN:["I paint", "dance tango", "and cook"],
   }
 }
 

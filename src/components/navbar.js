@@ -10,9 +10,9 @@ const TEXTS = {
     [LANGUAGE_SV]:'Hem',
     [LANGUAGE_EN]:'Home'
   },
-  TECHNIQUE:{
-    [LANGUAGE_SV]:'Tekniken',
-    [LANGUAGE_EN]:'Technique'
+  HISTORY:{
+    [LANGUAGE_SV]:'Historia',
+    [LANGUAGE_EN]:'History'
   },
   LANGUAGE:{
     [LANGUAGE_SV]:"Engelska",
@@ -46,8 +46,8 @@ return(
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
-    <Link to="/technique/" className="navbar-item">
-      {TEXTS.TECHNIQUE[language]}
+    <Link to="/history/" className="navbar-item">
+      {TEXTS.HISTORY[language]}
     </Link>
     <a className="navbar-item" onClick={handleClick}>
       {TEXTS.LANGUAGE[language]}
