@@ -24,7 +24,7 @@ const TabletAndUp = () => {
   const [open, setOpen] = useState(0)
   const [openMobile, setOpenMobile] = useState(undefined)
   // const checkboxOpen = (ix) => setList([...list.slice(0, ix), {...list[ix], open:list[ix].open?undefined:true}, ...list.slice(ix + 1)])
-  const className="column is-2-mobile is-one-third-tablet is-half-desktop"   
+  const className="column is-one-fifth-mobile is-one-third-tablet is-half-desktop"   
   return(
   <StaticQuery
           query={graphql`
