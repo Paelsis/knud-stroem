@@ -22,7 +22,7 @@ const SubHeader = ({arr, style}) =>
   <h4 style={{...style, color:'white'}}>
     {arr.map((it,index) =>  
       <span>
-        {index>0?<span style={{color:'yellow'}}>&nbsp;&bull;&nbsp;</span>:null}
+        {index>0?<span style={{color:'red', ...style}}>&nbsp;&bull;&nbsp;</span>:null}
         <span>{it}</span>
       </span>
     )}
@@ -77,7 +77,7 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
         </div>
         <div>
           <SubHeader 
-            arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0}}
+            arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0, color:"#FF7034"}}
           />
         </div>
       </div>
