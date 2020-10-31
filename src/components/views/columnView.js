@@ -11,11 +11,6 @@ const styles = {
   root:{
     marginTop:'0.45rem',
   },
-  thumbnail:(open) => ({
-    height:50, 
-    border:open?'2px dotted #333':'0px',
-    opacity:open?0.5:1.0,
-  }),
   image: (im) =>({
     maxHeight:im.large?'80vh':'65vh',
     transform: im.rotate?'rotate(' + im.rotate + 'deg)':null,
@@ -24,11 +19,12 @@ const styles = {
 }
 
 
-export default ({list}) => {
+const TabletAndUp = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [open, setOpen] = useState(0)
+  const [openMobile, setOpenMobile] = useState(undefined)
   // const checkboxOpen = (ix) => setList([...list.slice(0, ix), {...list[ix], open:list[ix].open?undefined:true}, ...list.slice(ix + 1)])
-  const className="column is-one-quarter-mobile is-one-third-tablet is-half-desktop"   
+  const className="column is-2-mobile is-one-third-tablet is-half-desktop"   
   return(
   <StaticQuery
           query={graphql`
@@ -63,15 +59,18 @@ export default ({list}) => {
             const originalName = newList[open].node.originalName
             return (
               <div style={styles.root} className="columns is-centered">
-              <div className="column is-full-mobile is-half-tablet is-one-quarter-desktop is-offset-1-desktop">
+              <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop is-offset-1-desktop">
                 <div className="columns is-centered is-multiline is-mobile">
-                  {newList.map((im, ix)=>
+                  {
+                    newList.map((im, ix)=>
                     (ix >= startIndex && ix < startIndex + offset) ?
-                      <div className="column is-one-third-mobile is-half-desktop" onClick={()=>setOpen(ix)}>
+                      <div className={className} onClick={()=>setOpen(ix)}>
                           <Img fluid={im.node.fluid} />
                       </div>  
-                    :null  
-                  )}
+                    :
+                      null  
+                    )
+                  }
                 </div>
                 {newList.length > offset?
                   <div className="buttons" >
@@ -107,5 +106,10 @@ export default ({list}) => {
           }}
         />
 )}
+
+
+
+
+export default TabletAndUp
 
 
