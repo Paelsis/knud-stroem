@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 
 export default () =>
     <Layout>
-        <SEO title="Home page" />
+        <SEO title="All images" />
         <div>
             <Images />
         </div>

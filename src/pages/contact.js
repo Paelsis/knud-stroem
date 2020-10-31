@@ -57,7 +57,7 @@ export default () => {
 
   return (
     <Layout>
-      <SEO title="Page two" />
+      <SEO title="Contact" />
       <h1>Please contact me</h1>
       <div className='columns'>
 

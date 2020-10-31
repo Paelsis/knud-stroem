@@ -51,7 +51,7 @@ export default () => {
 
   return (
     <Layout>
-      <SEO title="Page two" />
+      <SEO title="History" />
       <div>
         {TEXTS.ICELIFTER.map(it =>
           <div>

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `WE PICK IT UP !`,
+    title: `KNUD STRØM - THE ARTIST !`,
     hoverTitle:'Vi sanerar våra hav, båtvrak, dumpade tunnor',
     description: `Vi sanerar våra hav, båtvrak, dumpade tunnor`,
     desc1: `VI SANERAR VÅRA HAV`,
