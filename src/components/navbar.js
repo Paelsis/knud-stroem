@@ -10,6 +10,10 @@ const TEXTS = {
     [LANGUAGE_SV]:'Hem',
     [LANGUAGE_EN]:'Home'
   },
+  ALL:{
+    [LANGUAGE_SV]:'Alla bilder',
+    [LANGUAGE_EN]:'All pictures'
+  },
   HISTORY:{
     [LANGUAGE_SV]:'Historia',
     [LANGUAGE_EN]:'History'
@@ -46,11 +50,14 @@ return(
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
+    <Link to="/all/" className="navbar-item">
+      {TEXTS.ALL[language]}
+    </Link>
     <Link to="/history/" className="navbar-item">
       {TEXTS.HISTORY[language]}
     </Link>
     <a className="navbar-item" onClick={handleClick}>
-      {TEXTS.LANGUAGE[language]}
+      {TEXTS.ALL[language]}
     </a>
     <Link to="/contact/" className="navbar-item">
       {TEXTS.CONTACT[language]}

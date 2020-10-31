@@ -16,7 +16,6 @@ const TEXTS = {
   }
 }
 
-const banner=require('../images/grass.jpeg')
 const bblack = '#2b2523'
 
 const SubHeader = ({arr, style}) => 
@@ -35,6 +34,10 @@ const mapStateToProps = (state) => {
   }
 }    
 
+const square = () =>
+  <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
+
+
 export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
   const [hover, setHover] = useState({})
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
@@ -44,40 +47,39 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
       className="is-size-1"
       style={{
         marginBottom: `1.45rem`,
-      }}
+    }}
     >
       <div 
           style={{
-          margin:'auto',
           display:'flex',  
           flexDirection:'column',
-          alignContent:'flex-left',
-          alignItems: 'flex-left',
-          margin:'auto',  
-          maxWidth: 960,
-          height:200,
-          padding: `1.45rem 1.0875rem`,
+          alignItems: 'center',
+          justifyContent: 'center',
+          height:150,
+          padding: `1.45rem`,
           opacity:hover['div']?0.5:1.0,
-          bacgroundImage:hover?banner:undefined,
           //background:hover['h1']?bblack:undefined,
           transition:'500ms all ease'
         }}
         onMouseEnter={()=>handleMouseEnter('div')}
         onMouseLeave={()=>handleMouseLeave('div')}
       >
-        <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
-        <Link
-          to="/"
-          className='title'
-          style={{
-            alignSelf:'left', 
-            textDecoration: `none`,
-            margin:0, padding:0,
-          }}
-        >
-          <h1 style={{fontSize:32}}>{TEXTS.title[language]}</h1>
-        </Link>
-        <SubHeader arr={TEXTS.subtitleArray[language]} style={{alignSelf:'left', padding:0, margin:0}}/>
+        <div>
+          <Link
+            to="/"
+            className='title'
+            style={{
+              textDecoration: `none`,
+            }}
+          >
+            <h1 style={{fontSize:32}}>{TEXTS.title[language]}</h1>
+          </Link>
+        </div>
+        <div>
+          <SubHeader 
+            arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0}}
+          />
+        </div>
       </div>
       <Navbar />
     </header>
