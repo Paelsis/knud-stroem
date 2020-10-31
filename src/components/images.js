@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
-import Image from './Image'
 
 export default () => {
       const [hover, handleHover] = useState(undefined) 
