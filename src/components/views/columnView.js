@@ -1,8 +1,10 @@
 import React, {useState} from "react"
+import { connect } from 'react-redux'
 import { graphql, StaticQuery } from "gatsby"
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Img from 'gatsby-image'
+import imagesJson from '../../images/images.json'
 
 
 const offset = 10
@@ -18,8 +20,15 @@ const styles = {
   }),
 }
 
+const TEXTS = {
+  HEIGHT:{SV:'Höjd', EN:'Height'},
+  WIDTH:{SV:'Bredd', EN:'Width'},
+  PRICE:{SV:'Pris', EN:'Price'},
 
-const TabletAndUp = () => {
+}
+
+
+const TabletAndUp = (props) => {
   const [startIndex, setStartIndex] = useState(0);
   const [open, setOpen] = useState(0)
   const [openMobile, setOpenMobile] = useState(undefined)
@@ -33,10 +42,11 @@ const TabletAndUp = () => {
                edges {
                  node {
                    fluid(maxWidth: 800) {
-                      ...GatsbyImageSharpFluid_noBase64
                       originalName
+                      ...GatsbyImageSharpFluid_noBase64
                    }
                  }
+                 
                }
              }
            }
@@ -56,7 +66,8 @@ const TabletAndUp = () => {
               setOpen(newStartIndex)
             }
             const fluid = newList[open].node.fluid
-            const originalName = newList[open].node.originalName
+            const originalName = newList[open].node.fluid.originalName
+            const image = imagesJson.find(it => it.originalName == originalName)
             return (
               <div style={styles.root} className="columns is-centered">
               <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop is-offset-1-desktop">
@@ -95,8 +106,11 @@ const TabletAndUp = () => {
                 <figure>
                   <Img fluid={fluid} />
                   <figcaption className="has-text-dark">
-                    <h4>{originalName}</h4>
-                    Här kommer text - {originalName}
+                    <h4>{open.originalName}</h4>
+                    {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
+                    <p>
+                    <small>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
+                    </p>
                   </figcaption>
                 </figure>
               </div>
@@ -108,8 +122,13 @@ const TabletAndUp = () => {
 )}
 
 
+// Map the dispatch to onMyClick
+const mapStateToProps = (state) => {
+  return {
+    language:state.language
+  }
+}    
 
-
-export default TabletAndUp
+export default connect(mapStateToProps)(TabletAndUp)
 
 
