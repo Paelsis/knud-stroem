@@ -6,6 +6,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Img from 'gatsby-image'
 import imagesJson from '../../images/images.json'
 
+const backgroundColor="#FF7034"
 
 const offset = 10
 
@@ -75,8 +76,8 @@ const TabletAndUp = (props) => {
                   {
                     newList.map((im, ix)=>
                     (ix >= startIndex && ix < startIndex + offset) ?
-                      <div className={className} onClick={()=>setOpen(ix)}>
-                          <Img fluid={im.node.fluid} />
+                      <div className={className} style={{cursor:'pointer'}} onClick={()=>setOpen(ix)} >
+                          <Img fluid={im.node.fluid} backgroundColor={backgroundColor} />
                       </div>  
                     :
                       null  
@@ -86,7 +87,7 @@ const TabletAndUp = (props) => {
                 {newList.length > offset?
                   <div className="buttons" >
                       {startIndex!==0?
-                        <div className="button is-light" onClick={previous}>
+                        <div className="button is-light" onClick={previous} style={{cursor:'pointer'}}>
                           <NavigateBeforeIcon />
                         </div>
                       :
@@ -104,7 +105,7 @@ const TabletAndUp = (props) => {
               </div>
               <div className="column is-offset-1">
                 <figure>
-                  <Img fluid={fluid} />
+                  <Img fluid={fluid} backgroundColor={backgroundColor} />
                   <figcaption className="has-text-dark">
                     <h4>{open.originalName}</h4>
                     {image?image.title?image.title:"No text":"title to image not defined in file images.json"}

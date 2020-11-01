@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -51,7 +51,7 @@ export default function Template()
                 <img src={it.node.frontmatter.src} alt={'Image'} style={{opacity:hover['div1']?0.5:1.0,  padding:0, transition:'2000ms all ease'}} />
               </div>
               <div 
-                style={{backgroundColor:hover['div2']?'yellow':undefined, transition:'2000ms all ease'}} className="column is-5 is-offset-2"
+                className="column is-5 is-offset-2"
                 onMouseEnter={()=>handleMouseEnter('div2')}
                 onMouseLeave={()=>handleMouseLeave('div2')}
               >

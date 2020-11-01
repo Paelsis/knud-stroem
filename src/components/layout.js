@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
         <footer style={{
           marginTop: `2rem`
         }}>
-          © {new Date().getFullYear()}, Knud Strøm
+          © {new Date().getFullYear()}, 
           {` `}
           <a href="mailto:knud55@outlook.com?subject=Mail från Knuds WEB-site">Knud Strøm Nielsen</a>
         </footer>

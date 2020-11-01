@@ -38,7 +38,7 @@ const square = () =>
   <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
 
 
-export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
+export default connect(mapStateToProps)(({language}) => {
   const [hover, setHover] = useState({})
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
@@ -49,6 +49,14 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
         marginBottom: `1.45rem`,
     }}
     >
+      <Link
+            to="/"
+            className='title'
+            style={{
+              textDecoration: `none`,
+            }}
+          >
+
       <div 
           style={{
           display:'flex',  
@@ -57,7 +65,7 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
           justifyContent: 'center',
           height:150,
           padding: `1.45rem`,
-          opacity:hover['div']?0.5:1.0,
+          opacity:1.0,
           //background:hover['h1']?bblack:undefined,
           transition:'500ms all ease'
         }}
@@ -65,15 +73,7 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
         onMouseLeave={()=>handleMouseLeave('div')}
       >
         <div>
-          <Link
-            to="/"
-            className='title'
-            style={{
-              textDecoration: `none`,
-            }}
-          >
             <h1 style={{fontSize:32}}>{TEXTS.title[language]}</h1>
-          </Link>
         </div>
         <div>
           <SubHeader 
@@ -81,6 +81,7 @@ export default connect(mapStateToProps)(({language, siteTitle, hoverTitle}) => {
           />
         </div>
       </div>
+      </Link>
       <Navbar />
     </header>
 
