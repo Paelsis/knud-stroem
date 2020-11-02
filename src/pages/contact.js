@@ -29,8 +29,8 @@ export default () => {
     )}
   </table>
 
-  const handleSubmit = (event) => {
-    alert('Test of handle submit');
+  const handleSubmit = e => {
+    e.preventDefault();
   }
 
   const styles = {
@@ -52,8 +52,10 @@ export default () => {
   }
 
   const src = `https://source.unsplash.com/random/600x600`  
-  const href = 'mailto:"mailto:knud55@outlook.com?subject=Från min hemsida av ' + values.firstname + ' ' + values.lastname + "&body=" + values.subject + '"'
- 
+  const href = 'mailto:knud55@outlook.com?subject=Från min hemsida' + '&body=' + 
+    values.firstname?values.firstname:'First name missing' + ' ' +  
+    values.lastname?values.lastname:'Last name missing' + ' ' +  
+    values.subject  
 
   return (
     <Layout>
@@ -84,9 +86,9 @@ export default () => {
             <textarea id="subject" name="subject" placeholder="Write something ..." value={values.subject} style={{...styles.text, height:'170px'}} onChange={handleChange}></textarea>
             <p/>
             &nbsp;
-            <a href={href}>
-              Send mail to me
-            </a>
+                <a href={href}>
+                Send mail to me
+                </a>
           </form>
         </div>
       </div>

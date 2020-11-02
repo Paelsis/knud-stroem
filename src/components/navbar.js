@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import {LANGUAGE_EN, LANGUAGE_SV, setLanguage} from '../state/reducers/language'
+import {setZoom} from '../state/reducers/zoom'
+import ZoomInIcon from '@material-ui/icons/ZoomIn'
+import ZoomOutIcon from '@material-ui/icons/ZoomOut'
+
 
 
 const TEXTS = {
@@ -76,6 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
       setLanguage: (language) => {dispatch(setLanguage(language))},
+      setZoom: (zoom) => {dispatch(setZoom(zoom))},
   }        
 }
 
