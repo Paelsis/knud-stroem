@@ -1,12 +1,10 @@
 import React, {useState} from "react"
 import { connect } from 'react-redux'
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import PropTypes from "prop-types"
 import {LANGUAGE_EN, LANGUAGE_SV, setLanguage} from '../state/reducers/language'
 import {setZoom} from '../state/reducers/zoom'
-import ZoomInIcon from '@material-ui/icons/ZoomIn'
-import ZoomOutIcon from '@material-ui/icons/ZoomOut'
-
+import { isLoggedIn, getUser, logout } from "../services/auth"
 
 
 const TEXTS = {
@@ -29,15 +27,45 @@ const TEXTS = {
   CONTACT:{
     [LANGUAGE_SV]:'Kontakt',
     [LANGUAGE_EN]:'Contact'
-  }
+  },
+  MY_PROFILE:{
+    [LANGUAGE_SV]:'Min Profil',
+    [LANGUAGE_EN]:'My Profile'
+  },
+  LOGOUT:{
+    [LANGUAGE_SV]:'Logout',
+    [LANGUAGE_EN]:'Logout'
+  },
+  LOGIN:{
+    [LANGUAGE_SV]:'Login',
+    [LANGUAGE_EN]:'Login'
+  },
+  NOT_LOGGED_IN:{
+    [LANGUAGE_SV]:'Du är inte inloggad',
+    [LANGUAGE_EN]:'You are not logged in'
+  },
+  MY_PROFILE:{
+    [LANGUAGE_SV]:'Min profil',
+    [LANGUAGE_EN]:'My profile'
+  },
 }
 
-const Func = ({language, setLanguage}) => {
+const Func = ({language, setLanguage, loggedIn}) => {
   const [objActive, setObjActive] = useState({})
   const toggleHamburger = (e) => {
     setObjActive({active:!objActive.active, navBarActiveClass:!objActive.active?'is-active':''})
   }
   const handleClick = () => setLanguage(language===LANGUAGE_EN?LANGUAGE_SV:LANGUAGE_EN)
+  const handleLogout = e =>  {
+    e.preventDefault()
+    logout(() => navigate(`/app/login`))
+  }
+  const handleLogin = e =>  {
+    console.log('Hello there')
+    e.preventDefault()
+    navigate(`/app/login`)
+  }
+
 return(
 <nav class="navbar is-size-4-mobile is-size-6" role="navigation" aria-label="main navigation">
   <div
@@ -49,8 +77,12 @@ return(
     <span />
     <span />
   </div>
-
-  <div id="navbarBasicExample" className={`navbar-menu  navbar-end ${objActive.navBarActiveClass}`}>
+  <div className={`navbar-menu navbar-start`}>
+    <a className="navbar-item">
+      <small>{loggedIn?"You are logged in as " +  getUser().name:null}</small>
+    </a>    
+  </div>
+  <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
@@ -66,6 +98,21 @@ return(
     <Link to="/contact/" className="navbar-item">
       {TEXTS.CONTACT[language]}
     </Link>
+    {loggedIn?
+      <Link to="/app/profile/" className="navbar-item">
+        {TEXTS.MY_PROFILE[language]}
+      </Link>
+    :null
+    }  
+    {loggedIn?
+      <a className="navbar-item" onClick={handleLogout}>
+        {TEXTS.LOGOUT[language]}
+      </a>
+      :
+      <a className="navbar-item" onClick={handleLogin} >
+        {TEXTS.LOGIN[language]}
+      </a>
+    }  
   </div>
 </nav>
 )}

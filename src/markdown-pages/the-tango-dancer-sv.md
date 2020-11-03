@@ -1,9 +1,10 @@
 ---
-slug: "/blog/my-second-post"
-date: "2020-12-01"
+slug: "/history/the-dancer-sv"
+date: "2020-12-02"
 year: "2020"
-title: "ICELIFTER DUMP"
+title: "TANGODANSAREN"
 src: 'https://source.unsplash.com/random/600x600'  
+language: "SV"
 ---
 Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
 when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 

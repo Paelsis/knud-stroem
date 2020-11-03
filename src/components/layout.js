@@ -8,7 +8,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { getUser, isLoggedIn } from "../services/auth"
 import Header from "./header"
+import Navbar from "./navbar"
 import "./layout.scss"
 
 const Layout = ({ children }) => {
@@ -21,13 +23,14 @@ const Layout = ({ children }) => {
       }
     }
   `)
-
+  const loggedIn = isLoggedIn()
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} hoverTitle={data.site.siteMetadata?.hoverTitle || `Hover Title`}  />
+      <Navbar loggedIn={loggedIn} />
       <div
         style={{
-          margin: `0 auto`,
+          margin: `0 auto`, 
           maxWidth: 1350,
           padding: `0 1.0875rem 3.45rem`,
         }}

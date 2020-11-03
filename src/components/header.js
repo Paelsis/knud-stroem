@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import { connect } from 'react-redux'
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import Navbar from "./navbar"
 import { auto } from "eol"
 
 const TEXTS = {
@@ -46,7 +45,7 @@ export default connect(mapStateToProps)(({language}) => {
     <header 
       className="is-size-1"
       style={{
-        marginBottom: `1.45rem`,
+        marginBottom: `0`,
     }}
     >
       <Link
@@ -82,7 +81,6 @@ export default connect(mapStateToProps)(({language}) => {
         </div>
       </div>
       </Link>
-      <Navbar />
     </header>
 
     )

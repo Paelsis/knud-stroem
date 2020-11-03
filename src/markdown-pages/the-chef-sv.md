@@ -1,9 +1,10 @@
 ---
-slug: "/blog/my-third-post"
-date: "2020-12-01"
+slug: "/history/the-chef-sv"
+date: "2020-12-03"
 year: "2020"
-title: "ICELIFTER GW"
+title: "KOCKEN"
 src: "https://source.unsplash.com/random/600x600"  
+language: "SV"
 ---
 ### Trying new things
 Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,

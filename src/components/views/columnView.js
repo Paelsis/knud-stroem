@@ -33,6 +33,9 @@ const TabletAndUp = (props) => {
   const [startIndex, setStartIndex] = useState(0);
   const [open, setOpen] = useState(0)
   const [openMobile, setOpenMobile] = useState(undefined)
+  const [hover, setHover] = useState({})
+  const handleMouseEnter = (name) => setHover({...hover, [name]:true})
+  const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
   // const checkboxOpen = (ix) => setList([...list.slice(0, ix), {...list[ix], open:list[ix].open?undefined:true}, ...list.slice(ix + 1)])
   const className="column is-one-fifth-mobile is-one-third-tablet is-half-desktop"   
   return(
@@ -103,15 +106,18 @@ const TabletAndUp = (props) => {
                   </div>
                 :null}
               </div>
-              <div className="column is-offset-1">
+              <div className="column is-offset-1" onMouseEnter={()=>handleMouseEnter('bigPic')} onMouseLeave={()=>handleMouseLeave('bigPic')}>
                 <figure>
                   <Img fluid={fluid} backgroundColor={backgroundColor} />
-                  <figcaption className="has-text-dark">
-                    <h4>{open.originalName}</h4>
-                    {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
-                    <p>
-                    <small>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
+                  <figcaption className="has-text-dark" style={{opacity:!image.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
+                    <p style={{fontWeight:100}}>
+                      {image.originalName}
                     </p>
+                    <small style={{fontWeight:100}}>
+                    {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
+                    </small>
+                    <br />
+                    <small style={{fontWeight:100}}>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
                   </figcaption>
                 </figure>
               </div>

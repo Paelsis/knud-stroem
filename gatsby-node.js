@@ -62,6 +62,7 @@ exports.onPostBuild = async ({ graphql }) => {
           height:"0 cm", 
           width:"0 cm",
           price: 0,
+          hover:true,
       }
 
       // Using the slug as the filename, write a file containing the data
@@ -75,4 +76,17 @@ exports.onPostBuild = async ({ graphql }) => {
     })
     fs.writeFileSync(`${postsPath}/images.json`, ']\n', {flag:'a'})
   })
+}
+
+// Implement the Gatsby API “onCreatePage”. This is
+// called after every page is created.
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = "/app/*"
+    // Update the page.
+    createPage(page)
+  }
 }
