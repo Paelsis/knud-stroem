@@ -86,7 +86,7 @@ return(
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
-    <Link to="/all/" className="navbar-item">
+    <Link to="/images/" className="navbar-item">
       {TEXTS.ALL[language]}
     </Link>
     <Link to="/history/" className="navbar-item">

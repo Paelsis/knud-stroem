@@ -62,10 +62,10 @@ export default () => {
                       :size===1?click===it.node.fluid.originalName?CLASS_NAME.LARGE.CLICK:CLASS_NAME.LARGE.NO_CLICK
                       :click===it.node.fluid.originalName?CLASS_NAME.NORMAL.CLICK:CLASS_NAME.NORMAL.NO_CLICK
                     }
-                    style={{opacity:hover===it.node.fluid.originalName?1.0:1.5, transition:'1000ms all ease', cursor:'pointer'}} 
+                    style={{opacity:hover===it.node.fluid.originalName?1.0:1.5, transition:'100ms all ease', cursor:'pointer'}} 
                     onMouseEnter={()=>handleHover(it.node.fluid.originalName)}
                     onMouseLeave={()=>handleHover(undefined)}
-                    onClick={()=>handleClick(click?undefined:it.node.fluid.originalName)}
+                    onClick={()=>handleClick(click === it.node.fluid.originalName?undefined:it.node.fluid.originalName)}
                   >
                     <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                     <small>{it.node.fluid.originalName}</small>

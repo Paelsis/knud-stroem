@@ -1,5 +1,10 @@
-import React, {useState} from "react"
+import React from "react"
+import Template from '../templates/blogAllTemplate'
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
-import TemplateAll from '../templates/pageTemplateAll'
-
-export default () => <TemplateAll />
+export default () => 
+    <Layout>
+        <SEO title="Blog all" />
+        <Template />
+    </Layout>

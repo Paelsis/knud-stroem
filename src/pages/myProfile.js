@@ -1,10 +1,12 @@
 import React from "react"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { Link } from "gatsby"
 import { getUser, isLoggedIn } from "../services/auth"
-import Layout from "../components/layout"
-export default function Home() {
+export default () => {
   return (
     <Layout>
+    <SEO title="Profile" />
       <h1>Hello {isLoggedIn() ? getUser().name : "world"}!</h1>
       <p>
         {isLoggedIn() ? (

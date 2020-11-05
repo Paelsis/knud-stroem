@@ -1,13 +1,11 @@
 import React, {useState} from "react"
 import Layout from "../components/layout"
-import Images from '../components/images'
 import SEO from "../components/seo"
+import Template from '../templates/imagesTemplate'
 
 
 export default () =>
     <Layout>
         <SEO title="All images" />
-        <div>
-            <Images />
-        </div>
+        <Template />
     </Layout>

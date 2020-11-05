@@ -1,7 +1,4 @@
 import React, {useState} from "react"
-import { Link } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
 import { StaticQuery, graphql } from "gatsby"
 
 const bblack = '#2b2523'
@@ -12,8 +9,7 @@ const Hline = ({header, year}) =>
   <div style={{float:'right', marginTop:'auto', fontSize:10}}>{year}</div>
 </div>
 
-export default function Template()
- {
+export default () => {
   const [hover, setHover] = useState({})
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
@@ -37,8 +33,6 @@ export default function Template()
     }
     `}
     render={data => (
-      <Layout>
-      <SEO title="Page two" />
       <div>
         {data.allMarkdownRemark.edges.map(it =>
           <div>
@@ -64,8 +58,7 @@ export default function Template()
           </div>
         )}
       </div>
-      <Link to="/">Go back  the homepage</Link>
-    </Layout>
     )}
     />
-  )}
+  )
+}

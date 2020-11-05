@@ -4,7 +4,7 @@ import { graphql, StaticQuery } from "gatsby"
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Img from 'gatsby-image'
-import imagesJson from '../../images/images.json'
+import imagesJson from '../images/images.json'
 
 const backgroundColor="#FF7034"
 
