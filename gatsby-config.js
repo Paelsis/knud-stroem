@@ -1,12 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `KNUD STRØM - THE ARTIST !`,
-    hoverTitle:'Vi sanerar våra hav, båtvrak, dumpade tunnor',
-    description: `Vi sanerar våra hav, båtvrak, dumpade tunnor`,
-    desc1: `VI SANERAR VÅRA HAV`,
-    desc2: `BÅTVRAK`,
-    desc3: `DUMPADE TUNNOR`,
-    author: `@gatsbyjs`,
+    author: `Per Eskilson`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -76,6 +71,20 @@ module.exports = {
         windowKey: '__PRELOADED_STATE__',
       },
     },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: "<YOUR_FIREBASE_API_KEY>",
+          authDomain: "<YOUR_FIREBASE_AUTH_DOMAIN>",
+          databaseURL: "<YOUR_FIREBASE_DATABASE_URL>",
+          projectId: "<YOUR_FIREBASE_PROJECT_ID>",
+          storageBucket: "<YOUR_FIREBASE_STORAGE_BUCKET>",
+          messagingSenderId: "<YOUR_FIREBASE_MESSAGING_SENDER_ID>",
+          appId: "<YOUR_FIREBASE_APP_ID>"
+        }
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
