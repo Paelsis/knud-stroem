@@ -33,9 +33,9 @@ export default () => {
                     }}
                 >
                     <div class="field">
-                    <label for="" class="label">Username</label>
+                    <label for="" class="label">email</label>
                     <div class="control has-icons-left">
-                        <input type="text" placeholder="e.g. john" class="input" name="username" onChange={handleChange} required />
+                        <input type="email" placeholder="e.g. john" class="input" name="email" onChange={handleChange} required />
                         <span class="icon is-small is-left">
                         <i class="fa fa-envelope"></i>
                         </span>
@@ -69,3 +69,5 @@ export default () => {
         </section>
     )
 }
+
+

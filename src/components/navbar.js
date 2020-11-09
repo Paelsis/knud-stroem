@@ -4,7 +4,7 @@ import { Link, navigate } from "gatsby"
 import PropTypes from "prop-types"
 import {LANGUAGE_EN, LANGUAGE_SV, setLanguage} from '../state/reducers/language'
 import {setZoom} from '../state/reducers/zoom'
-import { isLoggedIn, getUser, logout } from "../services/auth"
+import { getUser, logout } from "../services/auth"
 
 
 const TEXTS = {
@@ -79,7 +79,7 @@ return(
   </div>
   <div className={`navbar-menu navbar-start`}>
     <a className="navbar-item">
-      <small>{loggedIn?"You are logged in as " +  getUser().name:null}</small>
+      <small>{loggedIn?"You are logged in as " +  getUser().displayName:null}</small>
     </a>    
   </div>
   <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>

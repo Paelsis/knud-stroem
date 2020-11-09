@@ -21,6 +21,7 @@
     "gatsby-plugin-sass": "^2.3.18",
     "gatsby-plugin-sharp": "^2.6.43",
     "gatsby-source-filesystem": "^2.3.35",
+    "gatsby-theme-firebase": "^1.0.10",
     "gatsby-transformer-remark": "^2.8.47",
     "gatsby-transformer-sharp": "^2.5.20",
     "node-sass": "^4.14.1",

@@ -2,17 +2,13 @@ import firebase from "gatsby-plugin-firebase"
 
 export const isBrowser = () => typeof window !== "undefined"
 
-const users = [
+const accessList = [
     {
-        username:'per',
-        password:'eskilson',
-        name:"Per Eskilson",
+        displayName:"Per Eskilson",
         email:"paelsis@hotmail.com"
     },
     {
-        username:'pehr',
-        password:'rafstedt',
-        name:"Pehr Rafstedt",
+        displayName:"Pehr Rafstedt",
         email:"pr@raftstedt.se"
     },
 ]
@@ -36,34 +32,25 @@ export const getData = () =>
 const setData = data =>
   window.localStorage.setItem("gatsbyData", JSON.stringify(data))
 
-export const handleLogin = ({ username, password }) => {
-  users.forEach(it => { 
-    if (it.username === username && it.password === password) {
-        return setUser({
-            username: it.username,
-            name: it.name,
-            email: it.email,
-        })
+export const handleLogin = ({ username, email }) => {
+  accessList.forEach(it => { 
+    if (it.email === email) {
+        return setUser(it)
     }    
   })
   return false
 }
 
-export const handleLoginFirebase = ({ username, password }) => {
-    firebase
-      .database()
-      .ref("/data")
-      .once("value")
-      .then(snapshot => {
-        setUser(snapshot.val())
-      })
-    return false
-  }
-  
+export const handleLoginFirebase = ({user}) => {
+  return setUser(user)
+}
+
 export const isLoggedIn = () => {
   const user = getUser()
-  return !!user.username
+  console.log('isLoggedIn, user', user)
+  return !!user.email
 }
+
 export const logout = callback => {
   setUser({})
   callback()

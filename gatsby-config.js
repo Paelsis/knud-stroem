@@ -72,19 +72,24 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-firebase",
+      resolve: "gatsby-theme-firebase",
       options: {
         credentials: {
-          apiKey: "<YOUR_FIREBASE_API_KEY>",
-          authDomain: "<YOUR_FIREBASE_AUTH_DOMAIN>",
-          databaseURL: "<YOUR_FIREBASE_DATABASE_URL>",
-          projectId: "<YOUR_FIREBASE_PROJECT_ID>",
-          storageBucket: "<YOUR_FIREBASE_STORAGE_BUCKET>",
-          messagingSenderId: "<YOUR_FIREBASE_MESSAGING_SENDER_ID>",
-          appId: "<YOUR_FIREBASE_APP_ID>"
-        }
-      }
-    }
+          apiKey: "AIzaSyA3Whiz6rxX_qC5lG8sHE-45QZG272oCvA",
+          authDomain: "knud-stroem-art-gallery.firebaseapp.com",
+          databaseURL: "https://knud-stroem-art-gallery.firebaseio.com",
+          projectId: "knud-stroem-art-gallery",
+          storageBucket: "knud-stroem-art-gallery.appspot.com",
+          messagingSenderId: "99676543265",
+          appId: "1:99676543265:web:2755f835de2251c1a24660",
+          measurementId: "G-V56RGCYH43"
+        },
+        loginPath: "/login",
+        loginRedirectPath: "/dashboard",
+        socialLogins: ["google", "twitter", "facebook", "github"],
+      },
+    },
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
