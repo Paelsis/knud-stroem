@@ -50,7 +50,7 @@ const TEXTS = {
   },
   YOU_ARE_LOGGED_IN:{
     [LANGUAGE_SV]:'Du är inloggad som ',
-    [LANGUAGE_EN]:'You logged in as'
+    [LANGUAGE_EN]:'You logged in as '
   },
 }
 
