@@ -77,11 +77,14 @@ return(
     <span />
     <span />
   </div>
-  <div className={`navbar-menu navbar-start`}>
-    <a className="navbar-item">
-      <small>{loggedIn?"You are logged in as " +  getUser().displayName:null}</small>
-    </a>    
-  </div>
+  {loggedIn?
+    <div className={`navbar-menu navbar-start`}>
+      <a className="navbar-item">
+        <small>{"You are logged in as " +  getUser().displayName}</small>
+      </a>    
+      <img src={getUser().photoURL} alt="Foto" style={{position:'relative', top:'20%', borderRadius:"50%", height:40}} />
+    </div>
+  :null}
   <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
