@@ -20,8 +20,7 @@ if (isLoggedIn()) {
  
 return(
   <div className="columns is-vcentered">
-    <div className="column is-6">  
-        <h1>Custom Login</h1>
+    <div className="column is-12">  
         <FormState.Provider>
         <Form
             onLoginSuccess={user => {
