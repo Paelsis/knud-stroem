@@ -86,7 +86,7 @@ module.exports = {
         },
         loginPath: "/login",
         loginRedirectPath: "/dashboard",
-        socialLogins: ["google", "twitter", "facebook", "github"],
+        socialLogins: ["google"],
       },
     },
 
@@ -95,3 +95,5 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
 }
+
+
