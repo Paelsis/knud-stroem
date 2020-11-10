@@ -48,6 +48,10 @@ const TEXTS = {
     [LANGUAGE_SV]:'Min profil',
     [LANGUAGE_EN]:'My profile'
   },
+  YOU_ARE_LOGGED_IN:{
+    [LANGUAGE_SV]:'Du är inloggad som ',
+    [LANGUAGE_EN]:'You logged in as'
+  },
 }
 
 const Func = ({language, setLanguage, loggedIn}) => {
@@ -78,11 +82,11 @@ return(
     <span />
   </div>
   {loggedIn?
-    <div className={`navbar-menu navbar-start`}>
+    <div className={`navbar-menu navbar-start`} style={{paddingTop:0, marginTop:-10}}>
       <a className="navbar-item">
-        <small>{"You are logged in as " +  getUser().displayName}</small>
+        <small>{TEXTS.YOU_ARE_LOGGED_IN[language] +  getUser().displayName}</small>
       </a>    
-      <img src={getUser().photoURL} alt="Foto" style={{position:'relative', top:'20%', borderRadius:"50%", height:40}} />
+      <img src={getUser().photoURL} alt="Foto" style={{position:'relative', top:'20%', paddingTop:0, borderRadius:"50%", height:40}} />
     </div>
   :null}
   <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
