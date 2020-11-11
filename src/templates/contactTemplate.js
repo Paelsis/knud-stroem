@@ -36,7 +36,8 @@ export default () => {
   }
   }
 
-  const src = `https://source.unsplash.com/random/600x600`  
+  const src = require('../photos/contact/knud.jpg')
+
   const bodyPlus = values.firstname?values.firstname:' First name missing'
     + ' ' +  
     values.lastname?values.lastname:' Last name missing' 

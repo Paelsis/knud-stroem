@@ -2,7 +2,6 @@ import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import { connect } from 'react-redux'
 
-const src = `https://source.unsplash.com/random/600x600`  
 const bblack = '#2b2523'
 
 export default (props) => {
@@ -36,7 +35,6 @@ export default (props) => {
     render={data => {
       return(
               <div>
-
                 {data.allMarkdownRemark.nodes.filter(it => it.frontmatter.language === props.language).map(it =>
                   <div>
                     <div className="columns">
@@ -45,7 +43,7 @@ export default (props) => {
                         onMouseEnter={()=>handleMouseEnter('div1')}
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >
-                        <img src={src} alt={'Image'} style={{opacity:hover['div1']?0.5:1.0,  padding:0, transition:'2000ms all ease'}} />
+                        <img src={it.frontmatter.src} alt={'Image'} style={{opacity:hover['div1']?0.5:1.0,  padding:0, transition:'2000ms all ease'}} />
                       </div>
                       <div 
                         className="column is-5 is-offset-2"

@@ -11,7 +11,7 @@ const TEXTS = {
   },
   subtitleArray:{
     SV:["Jag målar", "dansar tango", "lagar mat"],
-    EN:["I paint", "dance tango", "and cook"],
+    EN:["I paint", "dance tango", "and swim"],
   }
 }
 
