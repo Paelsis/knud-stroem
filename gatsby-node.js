@@ -14,7 +14,7 @@ const path = require("path")
 // Use the onPostBuild Node API, which runs after the build has been completed.
 // Note that we have to use an async function here because the Remark plugin
 // writes the html property asynchronously.
-exports.onPostBuild = async ({ graphql }) => {
+exports.onPreBuild = async ({ graphql }) => {
   // Run the GraphQL query (from example above).
   await graphql(`
     {

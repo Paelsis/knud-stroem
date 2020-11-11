@@ -4,6 +4,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CancelIcon from '@material-ui/icons/Cancel';
+import JSONPretty from 'react-json-pretty';
+
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL
 
 const butColor ='#AAA' 
@@ -18,17 +20,27 @@ const styles={
   }
 }
 
+const PrettyPrintJson = ({data}) => {
+  // (destructured) data could be a prop for example
+  var JSONPrettyMon = require('react-json-pretty/dist/monikai');
+  return (
+    <JSONPretty data={data} theme={JSONPrettyMon}></JSONPretty>
+  )
+}
+
+
+
 class AddPhotoMultiple extends Component {
     constructor(props) {
       super(props);
       this.state = {
         buttonColor:butColor,
         selectedFiles:[],
-        newFileNames: [],
-        imagePreviewUrls: []
+        json:undefined
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleSubmitJson = this.handleSubmitJson.bind(this);
     }
   
     handleSubmit(event) {
@@ -41,10 +53,9 @@ class AddPhotoMultiple extends Component {
         if (this.props.subdir) {
           formData.append('subdir', this.props.subdir)
         }
-        for(let i=0; i < this.state.selectedFiles.length; i++) {
-          let selectedFile = this.state.selectedFiles[i]
-          let newFileName = this.state.newFileNames[i]
-          formData.append('newfile_arr[]', selectedFile, newFileName)
+        for (var key in this.state.selectedFiles) {
+          const obj = this.state.selectedFiles[key];
+          formData.append('newfile_arr[]', obj.file, obj.newFileName)
         } 
         console.log('formData', formData)
         this.setState({buttonColor:'yellow'})
@@ -58,34 +69,46 @@ class AddPhotoMultiple extends Component {
             this.state.newFileNames.forEach(it => {
               this.props.addImage(it)
             }) 
-            this.setState({selectedFiles:[], imagePreviewUrls:[], newFileNames:[], buttonColor:butColor})
+            this.setState({selectedFiles:[], buttonColor:butColor})
         }).catch(error => {
             console.log('ERROR: Failed to upload:', error);
-            this.setState({selectedFiles:[], imagePreviewUrls:[], newFileNames:[], buttonColor:'red'})
+            this.setState({selectedFiles:[], buttonColor:'red'})
         });
       }
     }
 
+    handleSubmitJson(event) {
+      event.preventDefault();
+      console.log('files', this.state.selectedFiles)
+      if (this.state.selectedFiles.length > 0) {
+        const obj = this.state.selectedFiles.map(it=>({newFileName:it.newFileName, caption:it.caption}));
+        const json = JSON.stringify(obj, null, "\t")
+        this.setState({json:obj})
+      }
+    }
+
+
     handleChange(e) {
       e.preventDefault();
-      const selectedFiles = e.target.files;
-      for(let i = 0; i < selectedFiles.length; i++) {
+      const files = e.target.files
+      for(let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          this.setState({
-            selectedFiles: [...this.state.selectedFiles, selectedFiles[i]],
-            imagePreviewUrls: [...this.state.imagePreviewUrls, reader.result],
-            newFileNames:[...this.state.newFileNames, selectedFiles[i].name],
-          });
+            let selectedFile = {
+              file: files[i],
+              previewUrl: reader.result,
+              newFileName:files[i].name 
+            }
+            this.setState({selectedFiles: [...this.state.selectedFiles, selectedFile]});
         }
-        reader.readAsDataURL(selectedFiles[i])
+        reader.readAsDataURL(files[i])
       }  
     }
 
-    handleFileNameChange (e, ix) {
+    handleKeyChange (e, ix) {
       // 1. Make a shallow copy of the items
       this.setState({
-        newFileNames: [...this.state.newFileNames.slice(0,ix), e.target.value, ...this.state.newFileNames.slice(ix+1)]
+        selectedFiles: [...this.state.selectedFiles.slice(0,ix), {...this.state.selectedFiles[ix], [e.target.name]:e.target.value}, ...this.state.selectedFiles.slice(ix+1)]
       })
     }
 
@@ -93,7 +116,7 @@ class AddPhotoMultiple extends Component {
 
     renderForm() {    
       return(
-        <form className={'columns is-narrow'}onSubmit={e=>this.handleSubmit(e)}>
+        <form className={'columns is-narrow'} onSubmit={e=>this.handleSubmitJson(e)}>
             <button 
               className='column is-narrow' 
               type="submit" 
@@ -104,32 +127,42 @@ class AddPhotoMultiple extends Component {
             <button  
               className='column is-narrow'
               style={{background:'transparent', border:'none'}}
-              onClick={()=>this.setState({selectedFiles: [], imagePreviewUrls:[], newFileNames:[], buttonColor:butColor})}
+              onClick={()=>this.setState({selectedFiles: [], buttonColor:butColor})}
             >
               <CancelIcon style={{...styles.button, color:this.state.buttonColor}} />                              
             </button>
         </form>
       )
   }
+
   render() {
-    let {imagePreviewUrls, selectedFiles} = this.state;
+    let {selectedFiles} = this.state;
     return (
       
-        imagePreviewUrls.length > 0?
+        selectedFiles.length > 0?
            <div className={'columns is-multiline'}>
-              {imagePreviewUrls.map((it, ix)=>
+              {selectedFiles.map((it, ix)=>
                 <div className='column is-half'>            
-                  <img src={it} style={{padding:0, border:'2px dotted yellow'}}/>
+                  <img src={it.previewUrl} style={{padding:0, border:'2px dotted yellow'}}/>
                   <input 
                     type='text' 
                     style={{marginTop:0, paddingTop:0, height:20, fontSize:'x-small'}}
-                    value={this.state.newFileNames[ix]} 
-                    onChange={(e)=>this.handleFileNameChange(e, ix)}
+                    name={'newFileName'}
+                    value={it.newFileName} 
+                    onChange={(e)=>this.handleKeyChange(e, ix)}
+                  />
+                  <textarea 
+                    name="caption" 
+                    value={it.caption} 
+                    rows="4" 
+                    cols="50" 
+                    onChange={(e)=>this.handleKeyChange(e, ix)}
                   />
                 </div>
               )} 
               {this.renderForm()}
-            </div>
+              <PrettyPrintJson data={this.state.json} />
+            </div>  
         :
           <div>
             <input 
