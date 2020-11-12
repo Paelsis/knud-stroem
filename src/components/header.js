@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import { connect } from 'react-redux'
+import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import { auto } from "eol"
@@ -11,7 +12,7 @@ const TEXTS = {
   },
   subtitleArray:{
     SV:["Jag målar", "dansar tango", "lagar mat"],
-    EN:["I paint", "dance tango", "and swim"],
+    EN:["I paint", "dance tango", "and cook"],
   }
 }
 
@@ -27,17 +28,23 @@ const SubHeader = ({arr, style}) =>
     )}
   </h4>
 
-const mapStateToProps = (state) => {
-  return {
-    language:state.language
-  }
-}    
 
 const square = () =>
   <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
 
 
-export default connect(mapStateToProps)(({language}) => {
+const Header = ({language}) => {
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+          titleSV 
+          titleEN
+        }
+      }
+    } 
+    `)
   const [hover, setHover] = useState({})
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
@@ -72,7 +79,7 @@ export default connect(mapStateToProps)(({language}) => {
         onMouseLeave={()=>handleMouseLeave('div')}
       >
         <div>
-            <h1 style={{fontSize:32}}>{TEXTS.title[language]}</h1>
+            <h1 style={{fontSize:32}}>{data.site.siteMetadata['title' + language]}</h1>
         </div>
         <div>
           <SubHeader 
@@ -82,7 +89,13 @@ export default connect(mapStateToProps)(({language}) => {
       </div>
       </Link>
     </header>
+  )
+}
 
-    )
+const mapStateToProps = (state) => {
+  return {
+    language:state.language
+  }
+}    
 
-})
+export default connect(mapStateToProps)(Header)

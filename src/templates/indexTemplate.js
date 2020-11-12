@@ -41,19 +41,18 @@ const TabletAndUp = (props) => {
   return(
   <StaticQuery
           query={graphql`
-          query {
-            allImageSharp {
-               edges {
-                 node {
-                   fluid(maxWidth: 800) {
-                      originalName
-                      ...GatsbyImageSharpFluid_noBase64
-                   }
-                 }
-                 
-               }
-             }
-           }
+          {
+            allImageSharp(filter: {fluid: {originalName: {regex: "/IMG/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+              edges {
+                node {
+                  fluid {
+                    originalName
+                    ...GatsbyImageSharpFluid_noBase64
+                  }
+                }
+              }
+            }
+          }
           `}
           render={data => {
             const list = data.allImageSharp.edges
@@ -109,16 +108,18 @@ const TabletAndUp = (props) => {
               <div className="column is-offset-1" onMouseEnter={()=>handleMouseEnter('bigPic')} onMouseLeave={()=>handleMouseLeave('bigPic')}>
                 <figure>
                   <Img fluid={fluid} backgroundColor={backgroundColor} />
-                  <figcaption className="has-text-dark" style={{opacity:!image.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
-                    <p style={{fontWeight:100}}>
-                      {image.originalName}
-                    </p>
-                    <small style={{fontWeight:100}}>
-                    {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
-                    </small>
-                    <br />
-                    <small style={{fontWeight:100}}>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
-                  </figcaption>
+                  {image?
+                    <figcaption className="has-text-dark" style={{opacity:!image.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
+                      <p style={{fontWeight:100}}>
+                        {image.originalName}
+                      </p>
+                      <small style={{fontWeight:100}}>
+                      {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
+                      </small>
+                      <br />
+                      <small style={{fontWeight:100}}>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
+                    </figcaption>
+                  :null}
                 </figure>
               </div>
             </div>

@@ -14,23 +14,23 @@ const path = require("path")
 // Use the onPostBuild Node API, which runs after the build has been completed.
 // Note that we have to use an async function here because the Remark plugin
 // writes the html property asynchronously.
-exports.onPreBuild = async ({ graphql }) => {
+exports.onPostBuild = async ({ graphql }) => {
   // Run the GraphQL query (from example above).
   await graphql(`
-    {
-        allFile(filter: {sourceInstanceName: {eq: "images"}}) {
-            edges {
-                node {
-                    sourceInstanceName
-                    relativeDirectory
-                    relativePath
-                    absolutePath
-                    name
-                }
-            }
+  {
+    allFile(filter: {sourceInstanceName: {eq: "images"}, relativePath: {regex: "/IMG/"}}, sort: {order: ASC, fields: name}) {
+      edges {
+        node {
+          sourceInstanceName
+          relativeDirectory
+          relativePath
+          absolutePath
+          name
         }
+      }
     }
-  `).then((result) => {
+  }
+    `).then((result) => {
     // A reference to where we are going to put the files. Note that the public
     // directory already exists because the build has been completed (since
     // we're in the onPostBuild hook).
@@ -58,11 +58,12 @@ exports.onPreBuild = async ({ graphql }) => {
       // want as mentioned when we wrote the original markdown file.
       const data = {
           originalName: img.relativePath,
-          title:"Please update title for image " + img.name + " in file images.json",
+          title:"Here you set the title for image " + img.name + " in file images.json",
+          publicName:"Here you set the public name of your picure WEB",
           height:"0 cm", 
           width:"0 cm",
-          price: 0,
-          hover:true,
+          price: "5000 SEK / 500 EUR / 550 USD",
+          hover:true, 
       }
 
       // Using the slug as the filename, write a file containing the data

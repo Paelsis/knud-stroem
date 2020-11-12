@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
-import { connect } from 'react-redux'
+import Img from 'gatsby-image'
 
+const src = `https://source.unsplash.com/random/600x600`  
 const bblack = '#2b2523'
 
 export default (props) => {
@@ -16,26 +17,41 @@ export default (props) => {
 
   return (
     <StaticQuery
-    query={graphql`{
-      allMarkdownRemark(filter: {frontmatter: {language: {}, slug: {regex: "/history/"}}}, sort: {fields: frontmatter___date, order: ASC}) {
-        nodes {
-          frontmatter {
-            title
-            slug
-            date
-            year
-            src
-            language
+      query={graphql`{
+        allMarkdownRemark(filter: {frontmatter: {language: {}, slug: {regex: "/history/"}}}, sort: {fields: frontmatter___date, order: ASC}) {
+          nodes {
+            frontmatter {
+              title
+              slug
+              date
+              year
+              src
+              language
+            }
+            html
           }
-          html
         }
+        allImageSharp(filter: {fluid: {originalName: {regex: "/HISTORY/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+          edges {
+            node {
+              fluid {
+                originalName
+                ...GatsbyImageSharpFluid_noBase64
+              }
+            }
+          }
+        }
+
       }
-    }
-   `}
+    `}
+
     render={data => {
+      const edges = data.allImageSharp.edges
+      const fluid = (index) => edges[Math.min(index, edges.length-1)].node.fluid
       return(
               <div>
-                {data.allMarkdownRemark.nodes.filter(it => it.frontmatter.language === props.language).map(it =>
+
+                {data.allMarkdownRemark.nodes.filter((it) => it.frontmatter.language === props.language).map((it, index) =>
                   <div>
                     <div className="columns">
                       <div style={{backgroundColor:hover['div1']?bblack:undefined, transition:'2000ms all ease'}} 
@@ -43,9 +59,9 @@ export default (props) => {
                         onMouseEnter={()=>handleMouseEnter('div1')}
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >
-                        <img src={it.frontmatter.src} alt={'Image'} style={{opacity:hover['div1']?0.5:1.0,  padding:0, transition:'2000ms all ease'}} />
-                      </div>
-                      <div 
+                      <Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}} />
+                    </div>
+                    <div 
                         className="column is-5 is-offset-2"
                         onMouseEnter={()=>handleMouseEnter('div2')}
                         onMouseLeave={()=>handleMouseLeave('div2')}

@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `KNUD STRØM - THE ARTIST !`,
+    titleSV: `KNUD STRØM - KONSTNÄREN !`,
+    titleEN: `KNUD STRØM - THE ARTIST !`,
     author: `Per Eskilson`,
   },
   plugins: [

@@ -30,18 +30,18 @@ export default () => {
       return (
         <StaticQuery
           query={graphql`
-          query {
-            allImageSharp {
-               edges {
-                 node {
-                   fluid(maxWidth: 4800) {
-                      ...GatsbyImageSharpFluid_noBase64
-                      originalName
-                   }
-                 }
-               }
-             }
-           }
+          {
+            allImageSharp(filter: {fluid: {originalName: {regex: "/IMG/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+              edges {
+                node {
+                  fluid {
+                    originalName
+                    ...GatsbyImageSharpFluid_noBase64
+                  }
+                }
+              }
+            }
+          }
           `}
           render={data => {
             return (

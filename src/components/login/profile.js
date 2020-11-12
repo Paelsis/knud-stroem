@@ -1,6 +1,7 @@
 import React from "react"
 import { getUser } from "../../services/auth"
 import AddPhotoMultiple from "../image/AddPhotoMultiple"
+import ProfileTemplate from "../../templates/profileTemplate"
 
 export default () => (
   <>
@@ -16,7 +17,7 @@ export default () => (
       <li>
           <AddPhotoMultiple />
       </li>
-
+      <ProfileTemplate />
     </ul>
   </>
 )
