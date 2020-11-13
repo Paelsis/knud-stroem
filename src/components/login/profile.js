@@ -9,11 +9,6 @@ export default () => (
     <ul>
       <li>Name: {getUser().displayName?getUser().displayName:"Display name unknown !"}</li>
       <li>E-mail: {getUser().email}</li>
-      {getUser().uid?
-        <li><img src={getUser().photoURL} height={200} alt='No profile image'/></li>
-
-      :null  
-      }  
       <li>
           <AddPhotoMultiple />
       </li>

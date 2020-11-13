@@ -3,6 +3,7 @@ module.exports = {
     title: `KNUD STRØM - THE ARTIST !`,
     titleSV: `KNUD STRØM - KONSTNÄREN !`,
     titleEN: `KNUD STRØM - THE ARTIST !`,
+    galleries:['2020','2019', '2018', '2017', '2016'],
     author: `Per Eskilson`,
   },
   plugins: [

@@ -7,6 +7,7 @@ import {setZoom} from '../state/reducers/zoom'
 import { getUser, logout } from "../services/auth"
 
 
+
 const TEXTS = {
   HOME:{
     [LANGUAGE_SV]:'Hem',
@@ -52,9 +53,13 @@ const TEXTS = {
     [LANGUAGE_SV]:'Du är inloggad som ',
     [LANGUAGE_EN]:'You logged in as '
   },
+  GALLERIES:{
+    [LANGUAGE_SV]:'Gallerier',
+    [LANGUAGE_EN]:'Galleries'
+  },
 }
 
-const Func = ({language, setLanguage, loggedIn}) => {
+const Func = ({galleries,language, setLanguage, loggedIn}) => {
   const [objActive, setObjActive] = useState({})
   const toggleHamburger = (e) => {
     setObjActive({active:!objActive.active, navBarActiveClass:!objActive.active?'is-active':''})
@@ -69,8 +74,8 @@ const Func = ({language, setLanguage, loggedIn}) => {
     e.preventDefault()
     navigate(`/app/login`)
   }
-
 return(
+
 <nav class="navbar is-size-4-mobile is-size-6" role="navigation" aria-label="main navigation">
   <div
     className={`navbar-burger burger ${objActive.navBarActiveClass}`}
@@ -86,13 +91,28 @@ return(
       <a className="navbar-item">
         <small>{TEXTS.YOU_ARE_LOGGED_IN[language] +  getUser().displayName}</small>
       </a>    
-      <img src={getUser().photoURL} alt="Foto" style={{position:'relative', top:'20%', paddingTop:0, borderRadius:"50%", height:40}} />
+      <img src={getUser().photoURL} alt="" style={{position:'relative', top:'20%', paddingTop:0, borderRadius:"50%", height:40}} />
     </div>
   :null}
+  
   <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
+  
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        {TEXTS.GALLERIES[language]}
+      </a>
+
+      <div class="navbar-dropdown">
+        {galleries.map(ga =>
+        <a class="navbar-item">
+          {ga}
+        </a>
+        )}
+      </div>
+    </div>
     <Link to="/images/" className="navbar-item">
       {TEXTS.ALL[language]}
     </Link>

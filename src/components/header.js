@@ -1,6 +1,5 @@
 import React, {useState} from "react"
 import { connect } from 'react-redux'
-import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import { auto } from "eol"
@@ -11,8 +10,8 @@ const TEXTS = {
     EN:"KNUD STROEM - PHOTO GALLERY !",
   },
   subtitleArray:{
-    SV:["Jag målar", "dansar tango", "lagar mat"],
-    EN:["I paint", "dance tango", "and cook"],
+    SV:["Jag målar", "dansar tango"],
+    EN:["I paint", "dance tango"],
   }
 }
 
@@ -33,18 +32,7 @@ const square = () =>
   <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
 
 
-const Header = ({language}) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          titleSV 
-          titleEN
-        }
-      }
-    } 
-    `)
+const Header = ({language, title}) => {
   const [hover, setHover] = useState({})
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
@@ -53,7 +41,8 @@ const Header = ({language}) => {
       className="is-size-1"
       style={{
         marginBottom: `0`,
-    }}
+        clip: "rect(0, 100px, 200px, 0)",
+      }}
     >
       <Link
             to="/"
@@ -79,7 +68,7 @@ const Header = ({language}) => {
         onMouseLeave={()=>handleMouseLeave('div')}
       >
         <div>
-            <h1 style={{fontSize:32}}>{data.site.siteMetadata['title' + language]}</h1>
+            <h1 style={{fontSize:32}}>{title[language]}</h1>
         </div>
         <div>
           <SubHeader 
