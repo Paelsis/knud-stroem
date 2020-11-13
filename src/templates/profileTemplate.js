@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
 import imagesJson from '../../src/images/images.json'
+import imagesJsonKnud from '../../src/images/images_KNUD.json'
 
 const backgroundColor="#FF7034"
 
@@ -22,6 +23,7 @@ const CLASS_NAME = {
 
 export default () => {
       const [arr, setArr] = useState(imagesJson)
+      const [json, setJson] = useState(undefined)
       const [click, handleClick] = useState(undefined) 
       const [size, setSize] = useState(0)
       return (
@@ -41,6 +43,12 @@ export default () => {
           }
           `}
           render={data => {
+
+
+            const findKnudName = (originalName) => {
+              const objFound  = imagesJsonKnud.find(it => it[originalName]?true:false)
+              return(objFound?objFound[originalName]:originalName)
+            }
             const handleChange = (e, index) => {
               const newArr = data.allImageSharp.edges.map((it, ix) => {
                 if (index === ix) {
@@ -50,11 +58,15 @@ export default () => {
                 }
               })
               setArr(newArr)
-            }      
+
+              // const json = newArr.map(it => ({...it, name:findKnudName(it.originalName)}))
+              // setJson(newArr)
+            }   
+                        
             const handleSubmit = () => {
-              setArr.log("arr", arr)
               alert("Fine")
             }
+
             const name = (it) => {
               const originalName = it.node.fluid.originalName.split('.')[0]
               const found = imagesJson.find(im => im.originalName === originalName)
@@ -77,7 +89,7 @@ export default () => {
                           <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                         </div>  
                           <div className="column is-12">
-                            <label>original file name: 
+                            <label>File: 
                               {value(it, 'originalName') + '.jpg'}
                             </label>
                           </div>
