@@ -3,8 +3,8 @@ import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
-
-
+import imagesJson from '../images/images.json'
+import { NavigateBeforeSharp } from "@material-ui/icons"
 
 const backgroundColor="#FF7034"
 
@@ -44,6 +44,7 @@ export default () => {
           }
           `}
           render={data => {
+            const image = (originalName) => imagesJson.find(it => it.originalName === originalName.split('.')[0])
             return (
               <div className="columns is-multiline" >
                  <div className="column is-12 is-hidden-mobile" style={{top:-299}}>
@@ -68,8 +69,12 @@ export default () => {
                     onClick={()=>handleClick(click === it.node.fluid.originalName?undefined:it.node.fluid.originalName)}
                   >
                     <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
-                    <small>{it.node.fluid.originalName}</small>
-                  </div>
+                    {click === it.node.fluid.originalName?
+                      <small>{image(it.node.fluid.originalName)?image(it.node.fluid.originalName).name + ' / ' + image(it.node.fluid.originalName).price + ' / ' + image(it.node.fluid.originalName).size:null}</small>
+                    :  
+                      <small>{image(it.node.fluid.originalName)?image(it.node.fluid.originalName).name:null}</small>
+                    }  
+                    </div>
                 )}
               </div>
             )
