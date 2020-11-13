@@ -57,6 +57,10 @@ const TEXTS = {
     [LANGUAGE_SV]:'Gallerier',
     [LANGUAGE_EN]:'Galleries'
   },
+  OLDER_IMAGES:{
+    [LANGUAGE_SV]:'Äldre',
+    [LANGUAGE_EN]:'Older'
+  },
 }
 
 const Func = ({galleries,language, setLanguage, loggedIn}) => {
@@ -101,7 +105,7 @@ return(
     </Link>
   
     <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
+      <a class="navbar-link is-arrowless">
         {TEXTS.GALLERIES[language]}
       </a>
 
@@ -111,6 +115,9 @@ return(
           {ga}
         </a>
         )}
+        <a class="navbar-item">
+          {TEXTS.OLDER_IMAGES[language]}
+        </a>
       </div>
     </div>
     <Link to="/images/" className="navbar-item">
