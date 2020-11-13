@@ -1,10 +1,7 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
-import ZoomInIcon from '@material-ui/icons/ZoomIn'
-import ZoomOutIcon from '@material-ui/icons/ZoomOut'
-
-
+import imagesJson from '../../src/images/images.json'
 
 const backgroundColor="#FF7034"
 
@@ -24,10 +21,9 @@ const CLASS_NAME = {
 }
 
 export default () => {
-      const [arr, setArr] = useState([])
+      const [arr, setArr] = useState(imagesJson)
       const [click, handleClick] = useState(undefined) 
       const [size, setSize] = useState(0)
-      const [json, setJson] = useState(undefined)
       return (
         <StaticQuery
           query={graphql`
@@ -44,7 +40,6 @@ export default () => {
             }
           }
           `}
-
           render={data => {
             const handleChange = (e, index) => {
               const newArr = data.allImageSharp.edges.map((it, ix) => {
@@ -57,16 +52,22 @@ export default () => {
               setArr(newArr)
             }      
             const handleSubmit = () => {
-              setJson.log("arr", arr)
+              setArr.log("arr", arr)
               alert("Fine")
             }
             const name = (it) => {
-              return it.node.fluid.originalName.split('.')[0]
+              const originalName = it.node.fluid.originalName.split('.')[0]
+              const found = imagesJson.find(im => im.originalName === originalName)
+              return found?found.name:originalName
+            }
+            const value = (it, key) => {
+              const originalName = it.node.fluid.originalName.split('.')[0]
+              const found = arr.find(im => im.originalName === originalName)
+              return found?found[key]:''
             }
             return (
               <div>
-
-              <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, "", "\t")}><button className="button" >Sänd din text till Per</button></a>
+              <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, null, "\t")}><button className="button" >Sänd din text till Per</button></a>
               <br />
               <form onSubmit={handleSubmit}>
                 <div className="columns is-multiline" >
@@ -76,20 +77,26 @@ export default () => {
                           <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                         </div>  
                           <div className="column is-12">
+                            <label>original file name: 
+                              {value(it, 'originalName') + '.jpg'}
+                            </label>
+                          </div>
+
+                          <div className="column is-12">
                             <label>Name:
-                              <input type="text" placeHolder={"Ex:" +  name(it)} name = {name(it)} value = {arr[index]?arr[index][name(it)]:''} onChange={e => handleChange(e, index)} />
+                              <input type="text" placeHolder={"Ex:" +  value(it, 'name')} name = {'name'} value = {value(it, 'name')} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
                          <div className="column is-12">
                           <label>Price:
-                          <input type="text" placeHolder={'Ex: 100 SEK / 10 EUR / 12 USD'} name = {'price'} value = {arr[index]?arr[index]['price']:''} onChange={e => handleChange(e, index)} />
+                          <input type="text" placeHolder={'Ex: 100 SEK / 10 EUR / 12 USD'} name = {'price'} value = {value(it, 'price')} onChange={e => handleChange(e, index)} />
                           </label>
                         </div>
 
                         <div className="column is-12">
                           <label>Size:
-                            <input type="text" placeHolder={'Example: 100cm x 50cm'} name = {'size'} value = {arr[index]?arr[index]['size']:''} onChange={e => handleChange(e, index)} />
+                            <input type="text" placeHolder={'Example: 100cm x 50cm'} name = {'size'} value = {value(it, 'size')} onChange={e => handleChange(e, index)} />
                           </label>
                         </div>
 

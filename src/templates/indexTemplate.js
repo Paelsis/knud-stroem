@@ -22,6 +22,7 @@ const styles = {
 }
 
 const TEXTS = {
+  SIZE:{SV:'Storlek', EN:'Size'},
   HEIGHT:{SV:'Höjd', EN:'Height'},
   WIDTH:{SV:'Bredd', EN:'Width'},
   PRICE:{SV:'Pris', EN:'Price'},
@@ -69,8 +70,8 @@ const TabletAndUp = (props) => {
               setOpen(newStartIndex)
             }
             const fluid = newList[open].node.fluid
-            const originalName = newList[open].node.fluid.originalName
-            const image = imagesJson.find(it => it.originalName == originalName)
+            const originalName = fluid.originalName.split('.')[0]
+            const image = imagesJson.find(it => it.originalName === originalName)
             return (
               <div style={styles.root} className="columns is-centered">
               <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop is-offset-1-desktop">
@@ -110,14 +111,11 @@ const TabletAndUp = (props) => {
                   <Img fluid={fluid} backgroundColor={backgroundColor} />
                   {image?
                     <figcaption className="has-text-dark" style={{opacity:!image.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
-                      <p style={{fontWeight:100}}>
-                        {image.originalName}
-                      </p>
                       <small style={{fontWeight:100}}>
-                      {image?image.title?image.title:"No text":"title to image not defined in file images.json"}
+                      {image?image.name?image.name:"No text":"title to image not defined in file images.json"}
                       </small>
                       <br />
-                      <small style={{fontWeight:100}}>{TEXTS.HEIGHT[props.language]}:{image.height}&nbsp;{TEXTS.WIDTH[props.language]}:{image.width}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
+                      <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{image.size}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
                     </figcaption>
                   :null}
                 </figure>
