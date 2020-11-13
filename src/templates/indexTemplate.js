@@ -115,7 +115,7 @@ const TabletAndUp = (props) => {
                       {image?image.name?image.name:"No text":"title to image not defined in file images.json"}
                       </small>
                       <br />
-                      <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{image.size}&nbsp;{TEXTS.PRICE[props.language]}:{image.price} SEK</small>
+                      <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{image.size}&nbsp;{TEXTS.PRICE[props.language]}:{image.price}</small>
                     </figcaption>
                   :null}
                 </figure>
