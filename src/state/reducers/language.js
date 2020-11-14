@@ -3,7 +3,7 @@ export const LANGUAGE_EN='EN' // English
 export const LANGUAGE_SV='SV' // Swedish
 export const LANGUAGE_ES='ES' // Spanish
 
-const initialState = LANGUAGE_SV
+const initialState = LANGUAGE_EN
 
 export const setLanguage = (language) => ({
       type: SET_LANGUAGE,

@@ -126,9 +126,6 @@ return(
     <Link to="/history/" className="navbar-item">
       {TEXTS.HISTORY[language]}
     </Link>
-    <a className="navbar-item" onClick={handleClick}>
-      {TEXTS.LANGUAGE[language]}
-    </a>
     <Link to="/contact/" className="navbar-item">
       {TEXTS.CONTACT[language]}
     </Link>
