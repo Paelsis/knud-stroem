@@ -78,6 +78,7 @@ const Func = ({galleries,language, setLanguage, loggedIn}) => {
     e.preventDefault()
     navigate(`/app/login`)
   }
+  const lastGalleryYear = galleries[galleries.length-1]
 return(
 
 <nav class="navbar is-size-4-mobile is-size-6" role="navigation" aria-label="main navigation">
@@ -99,7 +100,7 @@ return(
     </div>
   :null}
   
-  <div id="navbar1" className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
+  <div className={`navbar-menu navbar-end ${objActive.navBarActiveClass}`} style={{fontWeight:100, fontSize:14}}>
     <Link to="/" className="navbar-item">
       {TEXTS.HOME[language]}
     </Link>
@@ -110,14 +111,14 @@ return(
       </a>
 
       <div class="navbar-dropdown">
-        {galleries.map(ga =>
-        <a class="navbar-item">
-          {ga}
-        </a>
+        {galleries.map(year => 
+          <Link to={`/gallery?${year}`} className="navbar-item">
+            {year}
+          </Link>
         )}
-        <a class="navbar-item">
+        <Link to={`/gallery?${lastGalleryYear}&olderThan`} className="navbar-item">
           {TEXTS.OLDER_IMAGES[language]}
-        </a>
+        </Link>
       </div>
     </div>
     <Link to="/images/" className="navbar-item">

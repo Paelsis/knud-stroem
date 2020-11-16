@@ -3,8 +3,9 @@ import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
-import imagesJson from '../images/images.json'
 import { NavigateBeforeSharp } from "@material-ui/icons"
+import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../components/imagesJsonConvert'
+
 
 const backgroundColor="#FF7034"
 
@@ -21,11 +22,12 @@ const CLASS_NAME = {
     NO_CLICK:"column is-3 is-12-mobile",
     CLICK:"column is-three-quarters is-12-mobile"
   },
+
 }
 
 export default () => {
       const [hover, handleHover] = useState(undefined) 
-      const [click, handleClick] = useState(undefined) 
+      const [open, setOpen] = useState(undefined) 
       const [size, setSize] = useState(0)
       return (
         <StaticQuery
@@ -44,7 +46,8 @@ export default () => {
           }
           `}
           render={data => {
-            const image = (originalName) => imagesJson.find(it => it.originalName === originalName.split('.')[0])
+            const edges = edgesSelected(data.allImageSharp.edges, undefined, imagesJsonYear)
+            const imageJson = open?edges[open].imageJson:undefined
             return (
               <div className="columns is-multiline" >
                  <div className="column is-12 is-hidden-mobile" style={{top:-299}}>
@@ -56,23 +59,23 @@ export default () => {
                     <ZoomInIcon size="small" style={{opacity:0.3}}/>  
                   </span>
                  </div>  
-                 {data.allImageSharp.edges.map(it=>
+                 {edges.map((it, index)=>
                   <div 
                     className={
-                      size===-1?click===it.node.fluid.originalName?CLASS_NAME.SMALL.CLICK:CLASS_NAME.SMALL.NO_CLICK
-                      :size===1?click===it.node.fluid.originalName?CLASS_NAME.LARGE.CLICK:CLASS_NAME.LARGE.NO_CLICK
-                      :click===it.node.fluid.originalName?CLASS_NAME.NORMAL.CLICK:CLASS_NAME.NORMAL.NO_CLICK
+                      size===-1?open===index?CLASS_NAME.SMALL.CLICK:CLASS_NAME.SMALL.NO_CLICK
+                      :size===1?open===index?CLASS_NAME.LARGE.CLICK:CLASS_NAME.LARGE.NO_CLICK
+                      :open===index?CLASS_NAME.NORMAL.CLICK:CLASS_NAME.NORMAL.NO_CLICK
                     }
                     style={{opacity:hover===it.node.fluid.originalName?1.0:1.5, transition:'100ms all ease', cursor:'pointer'}} 
                     onMouseEnter={()=>handleHover(it.node.fluid.originalName)}
                     onMouseLeave={()=>handleHover(undefined)}
-                    onClick={()=>handleClick(click === it.node.fluid.originalName?undefined:it.node.fluid.originalName)}
+                    onClick={()=>setOpen(open?undefined:index)}
                   >
                     <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
-                    {click === it.node.fluid.originalName?
-                      <small>{image(it.node.fluid.originalName)?image(it.node.fluid.originalName).name + ' / ' + image(it.node.fluid.originalName).price + ' / ' + image(it.node.fluid.originalName).size:null}</small>
+                    {open === index?
+                      <small>{imageJson?imageJson.name + ' / ' + imageJson.price + ' / ' + imageJson.size:null}</small>
                     :  
-                      <small>{image(it.node.fluid.originalName)?image(it.node.fluid.originalName).name:null}</small>
+                      <small>{it.imageJson.name}</small>
                     }  
                     </div>
                 )}
