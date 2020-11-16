@@ -6,7 +6,7 @@ import Template from '../templates/indexTemplate'
 export default ({location}) => {
     const search = location.search?location.search:undefined
     const year = search?search.split('?')[1].split('&')[0]:undefined
-    const olderThan = search.indexOf('olderThan') !== -1?"olderThan":undefined
+    const olderThan = search?search.indexOf('olderThan') !== -1?"olderThan":undefined:undefined
     console.log('year', year, 'olderThan', olderThan)
     return(
     <Layout>
