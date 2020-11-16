@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { connect } from 'react-redux'
 import { graphql, StaticQuery } from "gatsby"
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -34,11 +34,14 @@ const TEXTS = {
 const Func = (props) => {
   const [startIndex, setStartIndex] = useState(0);
   const [open, setOpen] = useState(0)
-  const [openMobile, setOpenMobile] = useState(undefined)
   const [hover, setHover] = useState({})
+  useEffect(() => {
+    setOpen(0)
+    setStartIndex(0)
+  }, [props.year, props.olderThan])
+  console.log('startIndex reset', startIndex)
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
-
   // const checkboxOpen = (ix) => setList([...edges.slice(0, ix), {...edges[ix], open:edges[ix].open?undefined:true}, ...edges.slice(ix + 1)])
   const className="column is-one-fifth-mobile is-one-third-tablet is-half-desktop"   
   return(
@@ -62,9 +65,13 @@ const Func = (props) => {
             console.log('year:', year, 'olderThan:', props.olderThan, 'numberOfEdges:', data.allImageSharp.edges.length)
             const filterFunc = props.olderThan?imagesJsonOlderThanYear:imagesJsonYear
             const edges = edgesSelected(data.allImageSharp.edges, year, filterFunc)
-            console.log('Number of selected edges', edges.length)
-            const edgesRange = edges.length >0?edges.find((it, index) => (index >= startIndex && index < startIndex + offset && it.open))?edges
+
+            const edgesRange =  edges.length <= startIndex?edges
+            :edges.length >0?edges.find((it, index) => (index >= startIndex && index < startIndex + offset))?edges
             :[...edges.slice(0, startIndex), {...edges[startIndex], open:true}, ...edges.slice(startIndex + 1)]:[]
+
+            console.log('Number of selected edges', edges.length, 'edgesRange:', edgesRange)
+         
             const previous = () => {
               const newStartIndex = Math.max(startIndex-offset, 0)
               setStartIndex(newStartIndex)
@@ -75,8 +82,9 @@ const Func = (props) => {
               setStartIndex(newStartIndex)
               setOpen(newStartIndex)
             }
-            const fluid = edgesRange.length > 0?edgesRange[open].node.fluid:undefined
-            const imageJson = edgesRange.length > 0?edgesRange[open].imageJson:undefined
+            const openMin = Math.min(open, edgesRange.length-1)
+            const fluid = edgesRange.length > 0?edgesRange[openMin].node.fluid:undefined
+            const imageJson = edgesRange.length > 0?edgesRange[openMin].imageJson:undefined
             return (
               <>
               {fluid?
