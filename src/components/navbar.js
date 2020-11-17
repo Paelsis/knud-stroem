@@ -18,16 +18,16 @@ const TEXTS = {
     [LANGUAGE_EN]:'All pictures'
   },
   HISTORY:{
-    [LANGUAGE_SV]:'Historia',
-    [LANGUAGE_EN]:'History'
+    [LANGUAGE_SV]:'Om mig',
+    [LANGUAGE_EN]:'About me'
   },
   LANGUAGE:{
     [LANGUAGE_SV]:"Engelska",
     [LANGUAGE_EN]:"Swedish",
   },
   CONTACT:{
-    [LANGUAGE_SV]:'Kontakt',
-    [LANGUAGE_EN]:'Contact'
+    [LANGUAGE_SV]:'Kontakta mig',
+    [LANGUAGE_EN]:'Contact me'
   },
   MY_PROFILE:{
     [LANGUAGE_SV]:'Min Profil',

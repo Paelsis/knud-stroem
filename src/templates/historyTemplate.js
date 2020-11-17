@@ -7,12 +7,12 @@ const bblack = '#2b2523'
 
 export default (props) => {
   const [hover, setHover] = useState({})
-  const Hline = ({header, year}) =>
+  const Hline = ({leftText, rightText}) =>
     <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
-      {header?<div style={{float:'left', marginTop:'auto', fontSize:20}}>{header}</div>:null}
-      {year?<div style={{float:'right', marginTop:'auto', fontSize:10}}>{year}</div>:null}
+      {leftText?<div style={{float:'left', marginTop:'auto', fontSize:20}}>{leftText}</div>:null}
+      {rightText?<div style={{float:'right', marginTop:'auto', fontSize:10}}>{rightText}</div>:null}
     </div>
-  const handleMouseEnter = (name) => setHover({...hover, [name]:true})
+  const handleMouseEnter = (name) => setHover({...hover, [name]:undefined})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
 
   return (
@@ -54,7 +54,7 @@ export default (props) => {
                 {data.allMarkdownRemark.nodes.filter((it) => it.frontmatter.language === props.language).map((it, index) =>
                   <div>
                     <div className="columns">
-                      <div style={{backgroundColor:hover['div1']?bblack:undefined, transition:'2000ms all ease'}} 
+                      <div style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
                         className="column is-one-fifth is-offset-1" 
                         onMouseEnter={()=>handleMouseEnter('div1')}
                         onMouseLeave={()=>handleMouseLeave('div1')}
@@ -66,7 +66,7 @@ export default (props) => {
                         onMouseEnter={()=>handleMouseEnter('div2')}
                         onMouseLeave={()=>handleMouseLeave('div2')}
                       >
-                        <Hline header={it.frontmatter.title} year={it.frontmatter.year} />
+                        <Hline leftText={it.frontmatter.title} rightText={undefined} />
                         <hr style = {{width:'100%', backgroundColor:'lightBlue', height:'2px'}}/>
                         <div dangerouslySetInnerHTML={{ __html:it.html}} />
                       </div>
