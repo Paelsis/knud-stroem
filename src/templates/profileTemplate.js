@@ -52,7 +52,7 @@ export default () => {
             const handleChange = (e, index) => {
               const newArr = data.allImageSharp.edges.map((it, ix) => {
                 if (index === ix) {
-                  console.log('type:', e.target.type, 'checked:', e.target.checked, 'value:', e.target.value)
+                  // console.log('type:', e.target.type, 'checked:', e.target.checked, 'value:', e.target.value)
                   if (e.target.type === 'checkbox') {
                     return(arr[ix]?{...arr[ix], [e.target.name]:e.target.checked}:{[e.target.name]:e.target.checked})            
                   } else {
@@ -84,8 +84,10 @@ export default () => {
             }
             return (
               <div>
-              <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, null, "\t")}><button className="button" >Sänd din text till Per</button></a>
-              <br />
+              <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, null, "\t")}>
+                <button className="button" style={{backgroundColor:'orange', color:'white'}} >Sänd ditt formulär till Per</button>
+              </a>
+              <p />
               <form onSubmit={handleSubmit}>
                 <div className="columns is-multiline" >
                   {data.allImageSharp.edges.map((it, index)=>
