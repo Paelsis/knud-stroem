@@ -81,7 +81,7 @@ const Func = ({galleries,language, setLanguage, loggedIn}) => {
   const lastGalleryYear = galleries[galleries.length-1]
 return(
 
-<nav class="navbar is-size-4-mobile is-size-6" role="navigation" aria-label="main navigation">
+<nav class="navbar is-full"  role="navigation" aria-label="main navigation">
   <div
     className={`navbar-burger burger ${objActive.navBarActiveClass}`}
     data-target="navMenu"
@@ -92,11 +92,13 @@ return(
     <span />
   </div>
   {loggedIn?
-    <div className={`navbar-menu navbar-start`} style={{paddingTop:0, marginTop:-10}}>
-      <a className="navbar-item">
-        <small>{TEXTS.YOU_ARE_LOGGED_IN[language] +  getUser().displayName}</small>
-      </a>    
-      <img src={getUser().photoURL} alt="" style={{position:'relative', top:'20%', paddingTop:0, borderRadius:"50%", height:40}} />
+    <div className={`navbar-start`} style={{marginTop:0, height:20 }}>
+      <div className='navbar-brand' style={{padding:0, marginTop:0}}>
+        <img className='column'src={getUser().photoURL} alt="" style={{position:'relative', borderRadius:"50%", height:60}} />
+      </div>
+      <div className={'navbar-item'} style={{height:60, padding:0, marginTop:0, vertialAlign:'center'}}>
+        <small className='column'>{TEXTS.YOU_ARE_LOGGED_IN[language] +  getUser().displayName}</small>
+      </div>
     </div>
   :null}
   
