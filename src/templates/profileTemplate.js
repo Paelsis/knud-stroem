@@ -52,7 +52,12 @@ export default () => {
             const handleChange = (e, index) => {
               const newArr = data.allImageSharp.edges.map((it, ix) => {
                 if (index === ix) {
-                  return(arr[ix]?{...arr[ix], [e.target.name]:e.target.value}:{[e.target.name]:e.target.value})            
+                  console.log('type:', e.target.type, 'checked:', e.target.checked, 'value:', e.target.value)
+                  if (e.target.type === 'checkbox') {
+                    return(arr[ix]?{...arr[ix], [e.target.name]:e.target.checked}:{[e.target.name]:e.target.checked})            
+                  } else {
+                    return(arr[ix]?{...arr[ix], [e.target.name]:e.target.value}:{[e.target.name]:e.target.value})            
+                  }  
                 } else {
                   return arr[ix]?arr[ix]:{}
                 }
@@ -84,40 +89,51 @@ export default () => {
               <form onSubmit={handleSubmit}>
                 <div className="columns is-multiline" >
                   {data.allImageSharp.edges.map((it, index)=>
-                  <div className="column is-4 columns is-multiline">
-                        <div className="column is-12">
+                    <div className="column is-4 columns is-multiline">
+                        <div className="column is-full">
                           <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                         </div>  
-                          <div className="column is-12">
+                          <div className="column is-full">
                             <label>File: 
                               {value(it, 'originalName') + '.jpg'}
                             </label>
                           </div>
 
-                          <div className="column is-12">
+                          <div className="column is-full">
                             <label>Name:
-                              <input type="text" placeHolder={"Ex:" +  value(it, 'name')} name = {'name'} value = {value(it, 'name')} onChange={e => handleChange(e, index)} />
+                              <input type="text" placeholder={"Ex:" +  value(it, 'name')} name = {'name'} value = {value(it, 'name')} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
-                         <div className="column is-12">
-                          <label>Price:
-                          <input type="text" placeHolder={'Ex: 100 SEK / 10 EUR / 12 USD'} name = {'price'} value = {value(it, 'price')} onChange={e => handleChange(e, index)} />
-                          </label>
-                        </div>
+                          <div className="column is-full">
+                            <label>Price:
+                            <input type="text" placeholder={'Ex: 100 SEK / 10 EUR / 12 USD'} name = {'price'} value = {value(it, 'price')} onChange={e => handleChange(e, index)} />
+                            </label>
+                          </div>
 
-                        <div className="column is-12">
-                          <label>Size:
-                            <input type="text" placeHolder={'Example: 100cm x 50cm'} name = {'size'} value = {value(it, 'size')} onChange={e => handleChange(e, index)} />
-                          </label>
-                        </div>
+                          <div className="column is-full">
+                            <label>Size:
+                              <input type="text" placeholder={'Example: 100cm x 50cm'} name = {'size'} value = {value(it, 'size')} onChange={e => handleChange(e, index)} />
+                            </label>
+                          </div>
 
-                        <div className="column is-12">
-                          <label>Description:<br/>
-                          <textarea placeholder="Write something ..." name="desc" value={arr[index]?arr[index]['desc']:''} style={{height:'170px'}} onChange={handleChange}></textarea>
-                          </label>
-                        </div>
-                    </div>
+                          <div className="column is-full">
+                            <label>Show on homepage:
+                              <input type="checkbox" placeholder={'Example: 100cm x 50cm'} name = {'showOnHomepage'} value = {value(it, 'showOnHomepage')} onChange={e => handleChange(e, index)} />
+                            </label>
+                          </div>
+
+                          <div className="column is-full">
+                            <label>Sequence number:
+                              <input type="number" placeholder={0} style={{width:40}} name = {'sequenceNumber'} value = {value(it, 'sequenceNumber')} onChange={e => handleChange(e, index)} />
+                            </label>
+                          </div>
+
+
+                          <div className="column is-full">
+                            <textarea placeholder="Description of image ..." name="desc" value={arr[index]?arr[index]['desc']:''} style={{height:'170px'}} onChange={handleChange}></textarea>
+                          </div>
+                      </div>
                     )}
                 </div>
               </form>

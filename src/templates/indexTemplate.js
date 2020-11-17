@@ -39,7 +39,7 @@ const Func = (props) => {
     setOpen(0)
     setStartIndex(0)
   }, [props.year, props.olderThan])
-  console.log('startIndex reset', startIndex)
+  // console.log('startIndex reset', startIndex)
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
   // const checkboxOpen = (ix) => setList([...edges.slice(0, ix), {...edges[ix], open:edges[ix].open?undefined:true}, ...edges.slice(ix + 1)])
@@ -62,16 +62,12 @@ const Func = (props) => {
           `}
           render={data => {
             const year = props.year?props.year:undefined
-            console.log('year:', year, 'olderThan:', props.olderThan, 'numberOfEdges:', data.allImageSharp.edges.length)
             const filterFunc = props.olderThan?imagesJsonOlderThanYear:imagesJsonYear
             const edges = edgesSelected(data.allImageSharp.edges, year, filterFunc)
 
             const edgesRange =  edges.length <= startIndex?edges
             :edges.length >0?edges.find((it, index) => (index >= startIndex && index < startIndex + offset))?edges
             :[...edges.slice(0, startIndex), {...edges[startIndex], open:true}, ...edges.slice(startIndex + 1)]:[]
-
-            console.log('Number of selected edges', edges.length, 'edgesRange:', edgesRange)
-         
             const previous = () => {
               const newStartIndex = Math.max(startIndex-offset, 0)
               setStartIndex(newStartIndex)
