@@ -9,7 +9,7 @@ import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../compone
 
 const backgroundColor="#FF7034"
 
-const offset = 10
+const offset = 12
 
 const styles = {
   root:{
@@ -43,7 +43,6 @@ const Func = (props) => {
   const handleMouseEnter = (name) => setHover({...hover, [name]:true})
   const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
   // const checkboxOpen = (ix) => setList([...edges.slice(0, ix), {...edges[ix], open:edges[ix].open?undefined:true}, ...edges.slice(ix + 1)])
-  const className="column is-one-fifth-mobile is-one-third-tablet is-half-desktop"   
   return(
   <StaticQuery
           query={graphql`
@@ -85,53 +84,53 @@ const Func = (props) => {
               <>
               {fluid?
                   <div style={styles.root} className="columns is-centered">
-                  <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop is-offset-1-desktop">
-                    <div className="columns is-centered is-multiline is-mobile">
-                      {
-                        edgesRange.map((it, ix)=>
-                        (ix >= startIndex && ix < startIndex + offset) ?
-                          <div className={className} style={{cursor:'pointer'}} onClick={()=>setOpen(ix)} >
-                              <Img fluid={it.node.fluid} backgroundColor={backgroundColor} />
-                          </div>  
-                        :
-                          null  
-                        )
-                      }
-                    </div>
-                    {edgesRange.length > offset?
-                      <div className="buttons" >
-                          {startIndex!==0?
-                            <div className="button is-light" onClick={previous} style={{cursor:'pointer'}}>
-                              <NavigateBeforeIcon />
-                            </div>
+                    <div className="column is-full-mobile is-one-third-tablet is-one-third-desktop is-offset-1-desktop">
+                      <div className="columns is-centered is-multiline is-mobile">
+                        {
+                          edgesRange.map((it, ix)=>
+                          (ix >= startIndex && ix < startIndex + offset) ?
+                            <div className={"column is-2-mobile is-one-third-tablet is-one-third-desktop"} style={{cursor:'pointer'}} onClick={()=>setOpen(ix)} >
+                                <Img fluid={it.node.fluid} backgroundColor={backgroundColor} />
+                            </div>  
                           :
                             null  
-                          } 
-                          {edgesRange.length - startIndex > offset?
-                            <div className="button is-light" onClick={next}>
-                              <NavigateNextIcon />
-                            </div>
-                          :
-                            null  
-                          }          
+                          )
+                        }
                       </div>
-                    :null}
-                  </div>
-                  <div className="column is-offset-1" onMouseEnter={()=>handleMouseEnter('bigPic')} onMouseLeave={()=>handleMouseLeave('bigPic')}>
-                    <figure>
-                      <Img fluid={fluid} backgroundColor={backgroundColor} />
-                      {imageJson?
-                        <figcaption className="has-text-dark" style={{opacity:!imageJson.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
-                          <small style={{fontWeight:100}}>
-                          {imageJson.name?imageJson.name:"No text"}
-                          </small>
-                          <br />
-                          <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{imageJson.size}&nbsp;{TEXTS.PRICE[props.language]}:{imageJson.price}</small>
-                        </figcaption>
+                      {edgesRange.length > offset?
+                        <div className="buttons" >
+                            {startIndex!==0?
+                              <div className="button is-light" onClick={previous} style={{cursor:'pointer'}}>
+                                <NavigateBeforeIcon />
+                              </div>
+                            :
+                              null  
+                            } 
+                            {edgesRange.length - startIndex > offset?
+                              <div className="button is-light" onClick={next}>
+                                <NavigateNextIcon />
+                              </div>
+                            :
+                              null  
+                            }          
+                        </div>
                       :null}
-                    </figure>
+                    </div>
+                    <div className="column is-offset-2" onMouseEnter={()=>handleMouseEnter('bigPic')} onMouseLeave={()=>handleMouseLeave('bigPic')}>
+                      <figure>
+                        <Img fluid={fluid} backgroundColor={backgroundColor} style={{width:'auto', objectFit:'cover'}}/>
+                        {imageJson?
+                          <figcaption className="has-text-dark" style={{opacity:!imageJson.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
+                            <small style={{fontWeight:100}}>
+                            {imageJson.name?imageJson.name:"No text"}
+                            </small>
+                            <br />
+                            <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{imageJson.size}&nbsp;{TEXTS.PRICE[props.language]}:{imageJson.price}</small>
+                          </figcaption>
+                        :null}
+                      </figure>
+                    </div>
                   </div>
-                </div>
               :<h2>No pictures from this period</h2>}
               </>
               )

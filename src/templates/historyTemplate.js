@@ -55,7 +55,7 @@ export default (props) => {
                   <div>
                     <div className="columns">
                       <div style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
-                        className="column is-one-fifth is-offset-1" 
+                        className="column is-one-third is-offset-1" 
                         onMouseEnter={()=>handleMouseEnter('div1')}
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >

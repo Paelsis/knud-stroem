@@ -92,7 +92,7 @@ return(
     <span />
   </div>
   {loggedIn?
-    <div className={`navbar-start`} style={{marginTop:0, height:20 }}>
+    <div className={`navbar-start is-hidden-touch`} style={{marginTop:0, height:20 }}>
       <div className='navbar-brand' style={{padding:0, marginTop:0}}>
         <img className='column'src={getUser().photoURL} alt="" style={{position:'relative', borderRadius:"50%", height:60}} />
       </div>
