@@ -4,18 +4,25 @@ $primary-color: green;
 $ghost-white:#F8F8FF;
 $orange:#FF7034;
 $header-background: pink;
-$title-color: $orange;
 $ice-green:rgb(217,243,229);// #2b2523;
 $alice-blue:'#F0F8FF'; 
 $nblack:#111111;
 $bblack:#2b2523;
+$obblack:rgba(43,19,17, 0.5);// #2b2523;
 $black-blue:#1a1b29; 
 $true-black:#010203;
+$title-color: $obblack;
 $body-background-color:$ghost-white;
 $navbar-background-color:$ghost-white;
 $ice-color:light-blue;
 
 @import "~bulma/bulma.sass";
+
+:root {
+  --color-bblack: $bblack;
+  --color-obblack: $obblack;
+  --color-orange: $orange;
+}
 
 html {
   color:lightblue;

@@ -1,8 +1,7 @@
 import React, {useState} from "react"
 import { connect } from 'react-redux'
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import { auto } from "eol"
+import "./layout.scss";
 
 const TEXTS = {
   title:{
@@ -18,10 +17,20 @@ const TEXTS = {
 const bblack = '#2b2523'
 
 const SubHeader = ({arr, style}) => 
-  <h4 style={{...style, color:'white'}}>
+  <h4 style={{...style, color:'var(--obblack)'}}>
     {arr.map((it,index) =>  
       <span>
-        {index>0?<span style={{color:'red', ...style}}>&nbsp;&bull;&nbsp;</span>:null}
+        {index>0?<span style={{...style, color:'var(--obblack)'}}>&nbsp;&bull;&nbsp;</span>:null}
+        <span>{it}</span>
+      </span>
+    )}
+  </h4>
+
+const SubHeaderWithAnd = ({arr, style}) => 
+  <h4 style={{...style, color:'var(--obblack)'}}>
+    {arr.map((it,index) =>  
+      <span>
+        {index>0?<span style={{...style, color:'var(--obblack)'}}>&nbsp;and&nbsp;</span>:null}
         <span>{it}</span>
       </span>
     )}
@@ -29,7 +38,7 @@ const SubHeader = ({arr, style}) =>
 
 
 const square = () =>
-  <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'#FF7034'}} />
+  <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'var(--obblack)'}} />
 
 
 const Header = ({language, title}) => {
@@ -71,7 +80,7 @@ const Header = ({language, title}) => {
             <h1 style={{fontSize:32}}>{title[language]}</h1>
         </div>
         <div>
-          <SubHeader 
+          <SubHeaderWithAnd 
             arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0, color:"#FF7034"}}
           />
         </div>

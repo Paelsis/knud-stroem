@@ -31,7 +31,7 @@ const TEXTS = {
 }
 
 // Two functions that can serve as imagesJsonFilter
-const Func = (props) => {
+const Template = (props) => {
   const [startIndex, setStartIndex] = useState(0);
   const [open, setOpen] = useState(0)
   const [hover, setHover] = useState({})
@@ -146,6 +146,6 @@ const mapStateToProps = (state) => {
   }
 }    
 
-export default connect(mapStateToProps)(Func)
+export default connect(mapStateToProps)(Template)
 
 

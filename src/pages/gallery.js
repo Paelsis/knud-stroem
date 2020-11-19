@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Template from '../templates/indexTemplate'
+import Template from '../templates/thumnailLeftTemplate'
 
 export default ({location}) => {
     const search = location.search?location.search:undefined
