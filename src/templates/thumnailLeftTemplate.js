@@ -118,7 +118,7 @@ const Template = (props) => {
                     </div>
                     <div className="column is-offset-2" onMouseEnter={()=>handleMouseEnter('bigPic')} onMouseLeave={()=>handleMouseLeave('bigPic')}>
                       <figure>
-                        <Img fluid={fluid} backgroundColor={backgroundColor} style={{width:'auto', objectFit:'cover'}}/>
+                        <Img fluid={fluid} backgroundColor={backgroundColor} style={{width:hover['bigPic']?'50vw':'auto', transition:'1500ms all ease', objectFit:'cover'}}/>
                         {imageJson?
                           <figcaption className="has-text-dark" style={{opacity:!imageJson.hover || hover['bigPic']?1.0:0, transition:'1500ms all ease', fontWeight:100}}>
                             <small style={{fontWeight:100}}>

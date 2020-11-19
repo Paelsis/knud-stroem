@@ -3,6 +3,7 @@ import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
 import imagesJson from '../../src/images/images.json'
 import imagesJsonKnud from '../../src/images/images_KNUD.json'
+import OpacityText from '../components/OpacityText'
 
 const backgroundColor="#FF7034"
 
@@ -88,6 +89,7 @@ export default () => {
                 <button className="button" style={{backgroundColor:'orange', color:'white'}} >Sänd ditt formulär till Per</button>
               </a>
               <p />
+              <OpacityText title={"KNUDS CHANGES"} text={"HERE KNUD CHANGE THE INFO ABOUT HIS IMAGES AND SEND THEM TO PÄLZ"} />
               <form onSubmit={handleSubmit}>
                 <div className="columns is-multiline" >
                   {data.allImageSharp.edges.map((it, index)=>
