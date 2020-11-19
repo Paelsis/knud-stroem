@@ -33,22 +33,14 @@ const Layout = ({ children }) => {
     <>
       <Header title={title} />
       <Navbar loggedIn={loggedIn} galleries={galleries} />
-      <div
-        style={{
-          margin: `0 auto`, 
-          maxWidth: 1350,
-          padding: `0 1.0875rem 3.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer style={{
-          marginTop: `2rem`
-        }}>
+      <div class="container is-widescreen">
+        <main style={{paddingLeft:10, paddingRight:10}}>{children}</main>
+        <footer style={{marginTop: `2rem`}}>
           © {new Date().getFullYear()}, 
           {` `}
           <a href="mailto:knud55@outlook.com?subject=Mail från Knuds WEB-site">Knud Strøm Nielsen</a>
         </footer>
-      </div>
+    </div>
     </>
   )
 }

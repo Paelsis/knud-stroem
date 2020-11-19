@@ -1,10 +1,11 @@
 
 $font-stack: crimson, Work Sans;
 $primary-color: green;
-$ghost-white:#F8F8FF;
 $orange:#FF7034;
 $header-background: pink;
 $ice-green:rgb(217,243,229);// #2b2523;
+$ghost-white:#F8F8FF;
+$light:hsl(0, 0%, 96%);
 $alice-blue:'#F0F8FF'; 
 $nblack:#111111;
 $bblack:#2b2523;
@@ -12,8 +13,8 @@ $obblack:rgba(43,19,17, 0.5);// #2b2523;
 $black-blue:#1a1b29; 
 $true-black:#010203;
 $title-color: $obblack;
-$body-background-color:$ghost-white;
-$navbar-background-color:$ghost-white;
+$body-background-color:$light;
+$navbar-background-color:$light;
 $ice-color:light-blue;
 
 @import "~bulma/bulma.sass";
@@ -25,6 +26,7 @@ $ice-color:light-blue;
 }
 
 html {
+  background-color: $body-background-color;
   color:lightblue;
   background-size:cover;
   -ms-text-size-adjust: 100%;

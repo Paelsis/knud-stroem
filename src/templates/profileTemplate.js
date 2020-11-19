@@ -31,7 +31,7 @@ export default () => {
         <StaticQuery
           query={graphql`
           {
-            allImageSharp(filter: {fluid: {originalName: {regex: "/IMG/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+            allImageSharp(sort: {order: ASC, fields: resolutions___originalName}) {
               edges {
                 node {
                   fluid {
@@ -83,6 +83,21 @@ export default () => {
               const found = arr.find(im => im.originalName === originalName)
               return found?found[key]:''
             }
+            const sortFunction = (a, b) => {
+              const nameA=value(a, 'name')
+              const nameB=value(b, 'name')
+              if (nameA.length === 0 && nameB.length === 0) {
+                return(a.node.fluid.originalName.localeCompare(b.node.fluid.originalName)) 
+              } else if (nameA.length === 0) {
+                return 1
+              } else if (nameB.length === 0) {
+                return -1
+              } else {
+                return nameA.localeCompare(nameB)
+              }
+            }
+
+
             return (
               <div>
               <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, null, "\t")}>
@@ -92,14 +107,14 @@ export default () => {
               <OpacityText title={"KNUDS CHANGES"} text={"HERE KNUD CHANGE THE INFO ABOUT HIS IMAGES AND SEND THEM TO PÄLZ"} />
               <form onSubmit={handleSubmit}>
                 <div className="columns is-multiline" >
-                  {data.allImageSharp.edges.map((it, index)=>
+                  {data.allImageSharp.edges.sort(sortFunction).map((it, index)=>
                     <div className="column is-4 columns is-multiline">
                         <div className="column is-full">
                           <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                         </div>  
                           <div className="column is-full">
                             <label>File: 
-                              {value(it, 'originalName') + '.jpg'}
+                              {it.node.fluid.originalName}
                             </label>
                           </div>
 
