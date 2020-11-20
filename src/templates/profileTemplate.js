@@ -64,6 +64,7 @@ export default (props) => {
             }
             
             const handleChange = (e, index) => {
+
               const newArr = data.allImageSharp.edges.map((it, ix) => {
                 if (index === ix) {
                   console.log('type:', e.target.type, 'checked:', e.target.checked, 'value:', e.target.value, 'index:', index)
@@ -76,6 +77,7 @@ export default (props) => {
                   return arr[ix]?arr[ix]:{originalName:it.node.fluid.originalName.split('.')[0]}
                 }
               })
+              
               setArr(newArr)
 
               // const json = newArr.map(it => ({...it, name:findKnudName(it.originalName)}))
