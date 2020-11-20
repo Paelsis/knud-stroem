@@ -47,7 +47,7 @@ const Template = (props) => {
   <StaticQuery
           query={graphql`
           {
-            allImageSharp(filter: {fluid: {originalName: {regex: "/IMG/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+            allImageSharp(sort: {order: ASC, fields: resolutions___originalName}) {
               edges {
                 node {
                   fluid {
