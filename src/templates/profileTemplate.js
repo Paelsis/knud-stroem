@@ -74,7 +74,7 @@ export default (props) => {
                     return(arr[ix]?{...arr[ix], [e.target.name]:e.target.value}:{[e.target.name]:e.target.value})            
                   }  
                 } else {
-                  return arr[ix]?arr[ix]:{originalName:it.node.fluid.originalName.split('.')[0]}
+                  return arr[ix]?arr[ix]:{originalName:it.node.fluid.originalName.split('.')[0], price:'100 euro'}
                 }
               })
               

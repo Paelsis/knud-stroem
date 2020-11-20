@@ -157,9 +157,9 @@
     },
     {
         "originalName": "29-IMG_7454",
-        "name": "2019-555",
-        "price": "100 euro",
-        "size": "47,5 x 39 cm."
+        "name": "2019-011",
+        "price": "70 euro",
+        "size": "32,5 x 45"
     },
     {
         "originalName": "30-IMG_7449",
@@ -267,7 +267,10 @@
         "originalName": "30-IMG_7449"
     },
     {
-        "originalName": "30-IMG_7495"
+        "originalName": "30-IMG_7495",
+        "name": "2018-001",
+        "price": "70 euro",
+        "size": "33 x 44"
     },
     {
         "originalName": "31-IMG_7451"
@@ -282,61 +285,97 @@
         "originalName": "33-IMG_7458"
     },
     {
-        "originalName": "33-IMG_7496"
+        "originalName": "33-IMG_7496",
+        "name": "2018-002",
+        "price": "70 euro",
+        "size": "36 x 44,5"
     },
     {
         "originalName": "34-IMG_7455"
     },
     {
-        "originalName": "34-IMG_7499"
+        "originalName": "34-IMG_7499",
+        "name": "2018-005",
+        "price": "70 euro",
+        "size": "34 x 45 cm."
     },
     {
         "originalName": "35-IMG_7460"
     },
     {
-        "originalName": "35-IMG_7498"
+        "originalName": "35-IMG_7498",
+        "name": "2018-004",
+        "price": "70 euro",
+        "size": "33 x 45 cm."
     },
     {
         "originalName": "36-IMG_7457"
     },
     {
-        "originalName": "36-IMG_7501"
+        "originalName": "36-IMG_7501",
+        "name": "2018-007",
+        "price": "70 euro",
+        "size": "35 x 44"
     },
     {
         "originalName": "37-IMG_7459"
     },
     {
-        "originalName": "37-IMG_7500"
+        "originalName": "37-IMG_7500",
+        "name": "2018-006",
+        "price": "70 euro",
+        "size": "36 x 45"
     },
     {
-        "originalName": "38-IMG_7503"
+        "originalName": "38-IMG_7503",
+        "name": "2018-009",
+        "price": "70 euro",
+        "size": "32,5 x 44"
     },
     {
-        "originalName": "39-IMG_7502"
+        "originalName": "39-IMG_7502",
+        "name": "2018-008",
+        "price": "70 euro",
+        "size": "33 x 44"
     },
     {
         "originalName": "4-IMG_7471"
     },
     {
-        "originalName": "40-IMG_7504"
+        "originalName": "40-IMG_7504",
+        "name": "2018-010",
+        "price": "70 euro",
+        "size": "33 x 45 cm."
     },
     {
-        "originalName": "42-IMG_7506"
+        "originalName": "42-IMG_7506",
+        "name": "2018-012",
+        "price": "70 euro",
+        "size": "34,5 x 44"
     },
     {
         "originalName": "43-IMG_7508"
     },
     {
-        "originalName": "44-IMG_7509"
+        "originalName": "44-IMG_7509",
+        "name": "2018-015",
+        "price": "70 euro",
+        "size": "34,5 x 44 cm."
     },
     {
-        "originalName": "45-IMG_7510"
+        "originalName": "45-IMG_7510",
+        "name": "2018-014",
+        "price": "20 euro",
+        "size": "32 x 44 cm."
     },
     {
         "originalName": "46-IMG_7512"
     },
     {
-        "originalName": "47-IMG_7513"
+        "originalName": "47-IMG_7513",
+        "name": "2018-016",
+        "price": "70 euro",
+        "size": "34,5 x 44"
     },
     {
         "originalName": "5-IMG_7468"
