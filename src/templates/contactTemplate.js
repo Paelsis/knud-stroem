@@ -64,14 +64,14 @@ export default () => {
           }
           `}
           render={data => {
-          const fluid = data.allImageSharp.edges[0].node.fluid
+          const fluid = data.allImageSharp.edges?data.allImageSharp.edges[0].node?data.allImageSharp.edges[0].node.fluid:undefined:undefined
           return(
             <>
             <h1>Please contact me</h1>
             <div className='columns'>
 
               <div className='column is-half'>
-              <Img fluid={fluid} backgroundColor={"grey"} style={{cursor:'pointer'}} />
+              {fluid?<Img fluid={fluid} backgroundColor={"grey"} style={{cursor:'pointer'}} />:null}
               </div>  
               <div className="column">
                 <form action="/action_page.php" onSubmit={handleSubmit}>
