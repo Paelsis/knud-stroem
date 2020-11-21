@@ -10,8 +10,10 @@ export default ({location}) => {
     console.log('year', year, 'olderThan', olderThan)
     return(
     <Layout>
-        <SEO title="Home page" />
-         <h2 style={{opacity:0.9, color:'orange', textAlign:'center'}}>{olderThan?"Older than ":""} {year}</h2>
+        <SEO title={"Gallery " + year} />
+        <div style={{textAlign:'center'}}>
+         <span style={{fontFamily:'broadcastmatter', fontSize:'2.2em', color:'hsla(43, 36%, 90%, 1)'}}>{olderThan?"Older than ":""} {year}</span>
+        </div> 
         <Template year={year} olderThan={olderThan} />
     </Layout>
     )

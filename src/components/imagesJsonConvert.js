@@ -1,8 +1,8 @@
 
 import imagesJson from '../images/images.json'
 
-export const imagesJsonYear = year => imagesJson.filter(im => year?im.name?year === im.name.substring(0,4):false:false)
-export const imagesJsonOlderThanYear = year => imagesJson.filter(im => year?im.name?im.name.substring(0,4).localeCompare(year.substring(0,4)) < 0:true:true)
+export const imagesJsonYear = year => imagesJson.filter(im => im.name?year?im.name.substring(0,4)===year:im.name.substring(0,4)==='2020':false)
+export const imagesJsonOlderThanYear = year => imagesJson.filter(im => im.name?year?im.name.substring(0,4).localeCompare(year.substring(0,4)) < 0:true:true)
 
 export const edgesSelected = (edges, year, imagesJsonFilter) => {
   const imagesJsonSelected = imagesJsonFilter(year)

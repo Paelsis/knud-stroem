@@ -7,6 +7,8 @@ import Img from 'gatsby-image'
 import { ContactlessOutlined } from "@material-ui/icons";
 import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../components/imagesJsonConvert'
 
+
+
 const backgroundColor="#FF7034"
 
 const offset = 12
