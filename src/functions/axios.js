@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const apiBaseUrl = process.env.GATSBY_API_BASE_URL
+const API_BASE_URL='https://www.tangokompaniet.com/app/slim/public'
+const apiBaseUrl = process?pricess.env?process.env.GATSBY_API_BASE_URL?process.env.GATSBY_API_BASE_URL:API_BASE_URL:API_BASE_URL:API_BASE_URL
 
 const fullPath = (url) => apiBaseUrl + url
 
