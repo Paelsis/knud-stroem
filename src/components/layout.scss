@@ -9,7 +9,7 @@ $light:hsl(0, 0%, 96%);
 $alice-blue:'#F0F8FF'; 
 $nblack:#111111;
 $bblack:#2b2523;
-$obblack:rgba(43,19,17, 0.5);// #2b2523;
+$obblack:rgba(43,19,17, 0.4);// #2b2523;
 $black-blue:#1a1b29; 
 $true-black:#010203;
 $title-color: $obblack;
@@ -19,10 +19,11 @@ $ice-color:light-blue;
 
 @import "~bulma/bulma.sass";
 
-:root {
-  --color-bblack: $bblack;
-  --color-obblack: $obblack;
-  --color-orange: $orange;
+:export {
+  subheaderColor: $obblack;
+  obblack:$obblack;
+  orange: $orange;
+  bblack: $bblack;
 }
 
 html {

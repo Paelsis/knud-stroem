@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
+import variables from "../components/layout.scss";
 
 const email = "knud55@outlook.com"
 const subject = "Från min hemsida"
@@ -73,7 +74,7 @@ export default () => {
                         :undefined  
           return(
             <>
-            <h1>Please contact me</h1>
+            <h1 style={{color:variables.obblack}}>Please contact me</h1>
             <div className='columns'>
 
               <div className='column is-half'>

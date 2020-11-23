@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { connect } from 'react-redux'
 import { Link } from "gatsby"
-import "./layout.scss";
+import variables from "./layout.scss";
 
 const TEXTS = {
   title:{
@@ -17,20 +17,20 @@ const TEXTS = {
 const bblack = '#2b2523'
 
 const SubHeader = ({arr, style}) => 
-  <h4 style={{...style, color:'var(--obblack)'}}>
+  <h4 style={{...style, color:variables.subheaderColor}}>
     {arr.map((it,index) =>  
       <span>
-        {index>0?<span style={{...style, color:'var(--obblack)'}}>&nbsp;&bull;&nbsp;</span>:null}
+        {index>0?<span style={{...style, color:variables.subheaderColor}}>&nbsp;&bull;&nbsp;</span>:null}
         <span>{it}</span>
       </span>
     )}
   </h4>
 
 const SubHeaderWithAnd = ({arr, style}) => 
-  <h4 style={{...style, color:'var(--obblack)'}}>
+  <h4 style={{...style, color:variables.subheaderColor}}>
     {arr.map((it,index) =>  
       <span>
-        {index>0?<span style={{...style, color:'var(--obblack)'}}>&nbsp;and&nbsp;</span>:null}
+        {index>0?<span style={{...style, color:variables.subheaderColor}}>&nbsp;and&nbsp;</span>:null}
         <span>{it}</span>
       </span>
     )}
@@ -38,7 +38,7 @@ const SubHeaderWithAnd = ({arr, style}) =>
 
 
 const square = () =>
-  <div style={{alignSelf:'left', height:50, width:50, backgroundColor:'var(--obblack)'}} />
+  <div style={{alignSelf:'left', height:50, width:50, backgroundColor:variables.subheaderColor}} />
 
 
 const Header = ({language, title}) => {
@@ -81,7 +81,7 @@ const Header = ({language, title}) => {
         </div>
         <div>
           <SubHeaderWithAnd 
-            arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0, color:"#FF7034"}}
+            arr={TEXTS.subtitleArray[language]} style={{padding:0, margin:0, color:variables.subheaderColor}}
           />
         </div>
       </div>

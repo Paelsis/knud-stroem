@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
+import Layout from "../components/layout"
+import variables from "../components/layout.scss" 
 
 const src = `https://source.unsplash.com/random/600x600`  
 const bblack = '#2b2523'
@@ -47,34 +49,34 @@ export default (props) => {
 
     render={data => {
       const edges = data.allImageSharp.edges
-      const fluid = (index) => edges[Math.min(index, edges.length-1)].node.fluid
+      const fluid = edges?(index) => edges[Math.min(index, edges.length-1)].node.fluid:null
       return(
-              <div>
-
+              <>
                 {data.allMarkdownRemark.nodes.filter((it) => it.frontmatter.language === props.language).map((it, index) =>
                   <div>
                     <div className="columns">
-                      <div style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
-                        className="column is-one-third is-offset-1" 
-                        onMouseEnter={()=>handleMouseEnter('div1')}
+                      <div className="column is-one-third is-offset-1" 
+                        style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >
-                      <Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}} />
-                    </div>
-                    <div 
-                        className="column is-5 is-offset-2"
-                        onMouseEnter={()=>handleMouseEnter('div2')}
-                        onMouseLeave={()=>handleMouseLeave('div2')}
+                        {fluid?  
+                          <Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}} />
+                        :null}  
+                      </div>
+                      <div 
+                          className="column is-5 is-offset-2"
+                          onMouseEnter={()=>handleMouseEnter('div2')}
+                          onMouseLeave={()=>handleMouseLeave('div2')}
                       >
-                        <Hline leftText={it.frontmatter.title} rightText={undefined} />
-                        <hr style = {{width:'100%', backgroundColor:'lightBlue', height:'2px'}}/>
-                        <div dangerouslySetInnerHTML={{ __html:it.html}} />
+                          <Hline leftText={it.frontmatter.title} rightText={undefined} />
+                          <hr style = {{width:'100%', backgroundColor:variables.orange, height:'2px'}}/>
+                          <div dangerouslySetInnerHTML={{ __html:it.html}} />
                       </div>
                     </div>
                     <div style={{color:'white', height:20}} />            
                   </div>
                 )}
-              </div>
+              </>
       )
     }}
     />
