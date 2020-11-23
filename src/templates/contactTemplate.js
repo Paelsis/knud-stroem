@@ -64,7 +64,13 @@ export default () => {
           }
           `}
           render={data => {
-          const fluid = data.allImageSharp.edges?data.allImageSharp.edges[0].node?data.allImageSharp.edges[0].node.fluid:undefined:undefined
+          const fluid = data.allImageSharp.edges?
+                          data.allImageSharp.edges[0]?
+                            data.allImageSharp.edges[0].node?
+                              data.allImageSharp.edges[0].node.fluid
+                            :undefined
+                          :undefined
+                        :undefined  
           return(
             <>
             <h1>Please contact me</h1>
