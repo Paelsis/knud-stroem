@@ -73,15 +73,15 @@
     },
     {
         "originalName": "15-IMG_7436",
-        "name": "2020-013",
-        "price": "100 euro",
-        "size": "45 x 41,5 cm."
+        "name": "2020-039",
+        "price": "110 euro",
+        "size": "48 x 59 cm."
     },
     {
         "originalName": "16-IMG_7431",
-        "name": "2020-008",
-        "price": "100 euro",
-        "size": "41,5 x 59 cm."
+        "name": "2020-048",
+        "price": "130 euro",
+        "size": "60 x 74,5 cm."
     },
     {
         "originalName": "17-IMG_7442",
@@ -97,9 +97,9 @@
     },
     {
         "originalName": "19-IMG_7444",
-        "name": "2020-021",
-        "price": "100 euro",
-        "size": "59 x 42,5 cm."
+        "name": "2020-050",
+        "price": "110 euro",
+        "size": "47 x 69 cm."
     },
     {
         "originalName": "20-IMG_7439",
@@ -109,9 +109,9 @@
     },
     {
         "originalName": "21-IMG_7446",
-        "name": "2020-023",
-        "price": "100 euro",
-        "size": "59 x 42,5 cm."
+        "name": "2020-047",
+        "price": "120",
+        "size": "62 x 75 cm."
     },
     {
         "originalName": "22-IMG_7441",
@@ -121,9 +121,9 @@
     },
     {
         "originalName": "23-IMG_7448",
-        "name": "2020-025",
-        "price": "100 euro",
-        "size": "48 x 39,5 cm."
+        "name": "2020-052",
+        "price": "110 euro",
+        "size": "47 x 69 cm."
     },
     {
         "originalName": "24-IMG_7443",
@@ -133,9 +133,9 @@
     },
     {
         "originalName": "25-IMG_7450",
-        "name": "2020-027",
-        "price": "100 euro",
-        "size": "48 x 39 cm."
+        "name": "2020-049",
+        "price": "110 euro",
+        "size": "48 x 69 cm."
     },
     {
         "originalName": "26-IMG_7445",
@@ -145,9 +145,10 @@
     },
     {
         "originalName": "27-IMG_7452",
-        "name": "2020-029",
-        "price": "100 euro",
-        "size": "47,5 x 39,5 cm."
+        "name": "2020-054",
+        "price": "130",
+        "size": "48 x 75 cm.",
+        "desc": "Acryl on paper."
     },
     {
         "originalName": "28-IMG_7447",
@@ -169,9 +170,9 @@
     },
     {
         "originalName": "31-IMG_7451",
-        "name": "2020-028",
-        "price": "100 euro",
-        "size": "48,5 x 39,5 cm. "
+        "name": "2020-051",
+        "price": "110 euro",
+        "size": "47 x 69 cm."
     },
     {
         "originalName": "32-IMG_7456",
@@ -181,15 +182,15 @@
     },
     {
         "originalName": "33-IMG_7458",
-        "name": "2020-034",
-        "price": "100 euro",
-        "size": "47,5 x 39,5 cm."
+        "name": "2019-006",
+        "price": "300 euro",
+        "size": "60 x 80 cm."
     },
     {
         "originalName": "34-IMG_7455",
-        "name": "2020-031",
-        "price": "100 euro",
-        "size": "47,5 x 39 cm. "
+        "name": "2020-041",
+        "price": "110 euro",
+        "size": "42 x 59 cm."
     },
     {
         "originalName": "35-IMG_7460",
@@ -199,9 +200,10 @@
     },
     {
         "originalName": "36-IMG_7457",
-        "name": "2020-033",
-        "price": "100 euro",
-        "size": "47,5 x 39 cm."
+        "name": "2020-053",
+        "price": "140 euro",
+        "size": "61,5 x 75 cm.",
+        "desc": "Acryl on paper"
     },
     {
         "originalName": "37-IMG_7459",
@@ -210,7 +212,10 @@
         "size": "47,5 x 39 cm."
     },
     {
-        "originalName": "21-IMG_7484"
+        "originalName": "21-IMG_7484",
+        "name": "2020-055",
+        "price": "140 euro",
+        "size": "62 x 75 cm."
     },
     {
         "originalName": "22-IMG_7441"
@@ -261,7 +266,10 @@
         "originalName": "29-IMG_7492"
     },
     {
-        "originalName": "3-IMG_7466"
+        "originalName": "3-IMG_7466",
+        "name": "2020-038",
+        "price": "100 euro",
+        "size": "42 x 59 cm."
     },
     {
         "originalName": "30-IMG_7449"
@@ -276,10 +284,7 @@
         "originalName": "31-IMG_7451"
     },
     {
-        "originalName": "31-IMG_7494",
-        "name": "2019-010",
-        "price": "100 euro",
-        "size": "44,5 x 61,5 cm."
+        "originalName": "31-IMG_7494"
     },
     {
         "originalName": "32-IMG_7456"
@@ -342,7 +347,10 @@
         "size": "33 x 44"
     },
     {
-        "originalName": "4-IMG_7471"
+        "originalName": "4-IMG_7471",
+        "name": "2020-043",
+        "price": "110 euro",
+        "size": "47 x 67 cm."
     },
     {
         "originalName": "40-IMG_7504",
@@ -357,10 +365,7 @@
         "size": "34,5 x 44"
     },
     {
-        "originalName": "43-IMG_7508",
-        "name": "2016-001",
-        "price": "100 euro",
-        "size": "44,5 x 64,5 cm."
+        "originalName": "43-IMG_7508"
     },
     {
         "originalName": "44-IMG_7509",
@@ -375,31 +380,42 @@
         "size": "32 x 44 cm."
     },
     {
-        "originalName": "46-IMG_7512",
-        "name": "2016-002",
-        "price": "100 euro",
-        "size": "45 x 65 cm."
+        "originalName": "46-IMG_7512"
     },
     {
         "originalName": "47-IMG_7513",
         "name": "2018-016",
+        "price": "34,5 x 44"
+    },
+    {
+        "originalName": "5-IMG_7468",
+        "name": "2020-040",
+        "price": "110 euro",
+        "size": "42 x 59 cm."
+    },
+    {
+        "originalName": "6-IMG_7473",
+        "name": "2020-045",
+        "price": "110 euro",
+        "size": "47 x 71 cm."
+    },
+    {
+        "originalName": "7-IMG_7470",
+        "name": "2020-042",
+        "price": "110 euro",
+        "size": "47 x 68"
+    },
+    {
+        "originalName": "8-IMG_7475",
+        "name": "2020-046",
         "price": "70 euro",
-        "size": "34,5 x 44"
+        "size": "20 x 42 cm."
     },
     {
-        "originalName": "5-IMG_7468"
-    },
-    {
-        "originalName": "6-IMG_7473"
-    },
-    {
-        "originalName": "7-IMG_7470"
-    },
-    {
-        "originalName": "8-IMG_7475"
-    },
-    {
-        "originalName": "9-IMG_7472"
+        "originalName": "9-IMG_7472",
+        "name": "2020-044",
+        "price": "110 euro",
+        "size": "47 x 68"
     },
     {
         "originalName": "header-3"
