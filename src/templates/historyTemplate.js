@@ -49,7 +49,7 @@ export default (props) => {
 
     render={data => {
       const edges = data.allImageSharp.edges
-      const fluid = edges?(index) => edges[Math.min(index, edges.length-1)].node.fluid:null
+      const fluid = edges?(index) => edges[Math.min(index, edges.length-1)].node.fluid:undefined
       return(
               <>
                 {data.allMarkdownRemark.nodes.filter((it) => it.frontmatter.language === props.language).map((it, index) =>
