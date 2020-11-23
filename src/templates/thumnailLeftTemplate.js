@@ -5,7 +5,7 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Img from 'gatsby-image'
 import { ContactlessOutlined } from "@material-ui/icons";
-import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../components/imagesJsonConvert'
+import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../components/edgesSelected'
 
 
 
@@ -86,7 +86,7 @@ const Template = (props) => {
               <>
               {fluid?
                   <div style={styles.root} className="columns is-centered">
-                    <div className="column is-full-mobile is-one-third-tablet is-one-third-desktop">
+                    <div className={hover['bigPic']?"column is-full-mobile is-one-third-tablet is-one-quarter-desktop":"column is-full-mobile is-one-third-tablet is-one-third-desktop"}>
                       <div className="columns is-centered is-multiline is-mobile">
                         {
                           edgesRange.map((it, ix)=>

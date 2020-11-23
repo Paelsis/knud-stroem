@@ -5,7 +5,7 @@ import Template from '../templates/thumnailLeftTemplate'
 
 export default () => 
     <Layout>
-        <SEO title="Home page" />
+        <SEO title="Home" />
         <Template />
     </Layout>
 

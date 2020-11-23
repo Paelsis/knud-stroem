@@ -6,7 +6,7 @@ import Template from '../templates/historyTemplate'
 
 const func = ({language}) =>
     <Layout>
-        <SEO title="History" />
+        <SEO title="About me" />
         <Template language={language}/>
     </Layout>
 

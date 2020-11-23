@@ -11,10 +11,12 @@ export default ({location}) => {
     return(
     <Layout>
         <SEO title={"Gallery " + year} />
-        <div style={{textAlign:'center'}}>
-         <span style={{fontFamily:'broadcastmatter', fontSize:'2.2em', color:'hsla(43, 36%, 90%, 1)'}}>{olderThan?"Older than ":""} {year}</span>
+        <div style={{position:'relative', top:-10, textAlign:'center'}}>
+            <span style={{fontFamily:'Roboto', fontSize:'2.4em', color:'hsla(43, 36%, 85%, 1)'}}>{olderThan?"Older than ":""} {year}</span>
         </div> 
         <Template year={year} olderThan={olderThan} />
     </Layout>
     )
 }
+
+//<span style={{fontFamily:'broadcastmatter', fontSize:'2.2em', color:'hsla(43, 36%, 90%, 1)'}}>{olderThan?"Older than ":""} {year}</span>

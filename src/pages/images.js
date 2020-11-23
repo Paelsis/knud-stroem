@@ -6,6 +6,6 @@ import Template from '../templates/imagesTemplate'
 
 export default () =>
     <Layout>
-        <SEO title="All images" />
+        <SEO title="All pictures" />
         <Template />
     </Layout>

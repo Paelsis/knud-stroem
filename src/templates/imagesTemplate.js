@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
 import { NavigateBeforeSharp } from "@material-ui/icons"
-import {edgesSelected, imagesJsonYear, imagesJsonOlderThanYear} from '../components/imagesJsonConvert'
+import {edgesSelected, imagesJsonAnyYear} from '../components/edgesSelected'
 
 
 const backgroundColor="#FF7034"
@@ -33,7 +33,7 @@ export default () => {
         <StaticQuery
           query={graphql`
           {
-            allImageSharp(filter: {fluid: {originalName: {regex: "/IMG/"}}}, sort: {order: ASC, fields: resolutions___originalName}) {
+            allImageSharp(sort: {order: ASC, fields: resolutions___originalName}) {
               edges {
                 node {
                   fluid {
@@ -46,7 +46,7 @@ export default () => {
           }
           `}
           render={data => {
-            const edges = edgesSelected(data.allImageSharp.edges, undefined, imagesJsonYear)
+            const edges = edgesSelected(data.allImageSharp.edges, undefined, imagesJsonAnyYear)
             const imageJson = open?edges[open].imageJson:undefined
             return (
               <div className="columns is-multiline" >
@@ -75,7 +75,7 @@ export default () => {
                     {open === index?
                       <small>{imageJson?imageJson.name + ' / ' + imageJson.price + ' / ' + imageJson.size:null}</small>
                     :  
-                      <small>{it.imageJson.name}</small>
+                      <small>{it.imageJson.name?it.imageJson.name:'(Filename:' + it.node.fluid.originalName + ')'}</small>
                     }  
                     </div>
                 )}
