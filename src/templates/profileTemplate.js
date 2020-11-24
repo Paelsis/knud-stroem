@@ -4,6 +4,8 @@ import Img from 'gatsby-image'
 import imagesJson from '../../src/images/images.json'
 import OpacityText from '../components/OpacityText'
 import {axiosGet, axiosPost} from "../functions/axios"
+import { FormatSize } from "@material-ui/icons"
+import images from "../pages/images"
 
 const backgroundColor="#FF7034"
 const REMOTE_FILE='images.json'
@@ -50,27 +52,8 @@ export default (props) => {
           `}
           render={data => {
 
-            const handleSubmit = (e) => {
-              setButtonColor({...buttonColor, submit:'pink'})
-              const payload = {
-                fname:REMOTE_FILE,
-                array:arr
-              }
-              axiosPost('/setJsonInFile', payload, (reply) => {
-                setSubmit(submit+1)
-                setButtonColor({...buttonColor, submit:'orange'})
-              })  
-              e.preventDefault();
-            }
-
-            const value = (it, key) => {
-              const originalName = it.node.fluid.originalName.split('.')[0]
-              const found = arr?arr.length >0?arr.find(it => it.originalName === originalName):undefined:undefined
-              return found?found[key]?found[key]:'':''
-            }
-
             const handleChange = (e, index) => {
-              const newArr = data.allImageSharp.edges.map((it, ix) => {
+              const newArr = arr.map((it, ix) => {
                 const originalName = it.node.fluid.originalName.split('.')[0];
                 if (index === ix) {
                   return arr[ix]?{...arr[ix], [e.target.name]:e.target.value}:{originalName, [e.target.name]:e.target.value}
@@ -92,24 +75,6 @@ export default (props) => {
               return a.name.localeCompare(b.name)  
             }  
 
-            const handleFetch = (e) => {
-              setButtonColor({...buttonColor, fetch:'pink'})
-              axiosGet('/getJsonFromFile?fname=' + REMOTE_FILE, (axiosData) => {
-                  console.log('jsonArray:', axiosData.result)
-                  const newArr = data.allImageSharp.edges.map(it => {
-                      const originalName = it.node.fluid.originalName.split('.')[0]
-                      const jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
-                      if (jsFound!==undefined) {
-                        return {...jsFound, node:it.node}
-                      } else {
-                        return {originalName, node:it.node}
-                      }     
-                  }).sort(sortName)
-                  setButtonColor({...buttonColor, fetch:'orange'})
-                  setArr(newArr)  
-              })
-            }
-
             const handleFetchStatic = (e) => {
               const newArr = data.allImageSharp.edges.map(it => {
                 const originalName = it.node.fluid.originalName.split('.')[0]
@@ -122,6 +87,42 @@ export default (props) => {
               }).sort(sortName)
               setArr(newArr)  
             }
+
+            const handleFetch = (e) => {
+              setButtonColor({...buttonColor, fetch:'pink'})
+
+              axiosGet('/getJsonFromFile?fname=' + REMOTE_FILE, (axiosData) => {
+                  console.log('jsonArray:', axiosData.result)
+                  const newArr = data.allImageSharp.edges.map(it => {
+                      const originalName = it.node.fluid.originalName.split('.')[0]
+                      let jsFound = imagesJson.find(it => it.originalName === originalName);
+                      if (jsFound === undefined) {
+                        jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
+                      }  
+                      if (jsFound===undefined) {
+                        return {originalName, node:it.node}
+                      } else {
+                        return {...jsFound, node:it.node}
+                      }     
+                  }).sort(sortName).filter(it => (it.name?(it.name.length < 7):true) && (!(it.originalName.includes('HISTORY'))) && (!(it.originalName.includes('knud'))) && (!(it.originalName.includes('header')))) 
+                  setButtonColor({...buttonColor, fetch:'orange'})
+                  setArr(newArr)  
+              })
+            }
+
+            const handleSubmit = (e) => {
+              setButtonColor({...buttonColor, submit:'pink'})
+              const payload = {
+                fname:REMOTE_FILE,
+                array:arr
+              }
+              axiosPost('/setJsonInFile', payload, (reply) => {
+                setSubmit(submit+1)
+                setButtonColor({...buttonColor, submit:'orange'})
+              })  
+              e.preventDefault();
+            }
+
             
 
 
@@ -138,21 +139,23 @@ export default (props) => {
 
             return (
               <div>
-                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} onClick={handleFetchStatic}>Hämta data från statisk fil</button>
-                <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr, null, "\t")}>
+                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} disabled onClick={handleFetchStatic}>Hämta data från statisk fil</button>
+                <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined})), null, "\t")}>
                   <button className="button" style={{backgroundColor:'orange', color:'white'}} >Skicka ändrade data i mail till Per</button>
                 </a>
               <p />
               <OpacityText title={"KNUDS CHANGES"} text={"HERE KNUD CHANGE THE INFO ABOUT HIS IMAGES AND SEND THEM TO PÄLZ"} />
               <form onSubmit={handleSubmit}>
-                <button className="button" type="button" style={{backgroundColor:buttonColor.fetch, color:'white'}} onClick={handleFetch}>Hämta data från fil</button>
-                <button className="button" type="submit" style={{backgroundColor:buttonColor.submit, color:'white'}} >Spara data i fil</button>
-                <button className="button" type="reset" style={{backgroundColor:'orange', color:'white'}} onClick={handleReset}>Reset</button>
+                <button className="button" type="button" style={{backgroundColor:buttonColor.fetch, color:'white'}} onClick={handleFetch}>Hämta</button>
+                <button className="button" type="submit" style={{backgroundColor:buttonColor.submit, color:'white'}} >Spara</button>
+                <button className="button" type="reset" disabled style={{backgroundColor:'orange', color:'white'}} onClick={handleReset}>Reset</button>
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
                     <div className="column is-4 columns is-multiline">
                         <div className="column is-full">
+                          {it.node.fluid?
                           <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
+                          :null}
                         </div>  
                           <div className="column is-full">
                             <label>File: 
@@ -162,43 +165,43 @@ export default (props) => {
 
                           <div className="column is-full">
                             <label>Name:
-                            <input type="text" placeholder={'Ex: YYYY-NNN'} name = {'name'} value = {value(it, 'name')} onChange={e => handleChange(e, index)} />
+                            <input type="text" placeholder={'Ex: YYYY-NNN'} name = {'name'} value = {it.name?it.name:''} onChange={e => handleChange(e, index)} /> 
                             </label>
                           </div>
 
                           <div className="column is-full">
                             <label>Price:
-                            <input type="text" placeholder={'Ex: 100 eur'} name = {'price'} value = {value(it, 'price')} onChange={e => handleChange(e, index)} />
+                            <input type="text" placeholder={'Ex: 100 eur'} name = {'price'} value = {it.price?it.price:''} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
                           <div className="column is-full">
                             <label>Size:
-                              <input type="text" placeholder={'Ex: width x height'} name = {'size'} value = {value(it, 'size')} onChange={e => handleChange(e, index)} />
+                              <input type="text" placeholder={'Ex: width x height'} name = {'size'} value = {it.size?it.size:''} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
                           <div className="column is-full">
                             <label>Show on homepage:
-                              <input type="checkbox" name = {'showOnHomepage'} value = {value(it, 'showOnHomepage')} onChange={e => handleChange(e, index)} />
+                              <input type="checkbox" name = {'showOnHomepage'} value = {it.showOnHomepage?it.showOnHomepage:''} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
 
                           <div className="column is-full">
                             <label>Hide this image:
-                              <input type="checkbox" name = {'hidden'} value = {value(it, 'hidden')} onChange={e => handleChange(e, index)} />
+                              <input type="checkbox" name = {'hidden'} value = {it.checkbox?it.checkbox:''} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
                           <div className="column is-full">
                             <label>Sequence number:
-                              <input type="number" placeholder={0} style={{width:40}} name = {'sequenceNumber'} value = {value(it, 'sequenceNumber')} onChange={e => handleChange(e, index)} />
+                              <input type="number" placeholder={0} style={{width:40}} name = {'sequenceNumber'} value = {it.sequence?it.sequence:''} onChange={e => handleChange(e, index)} />
                             </label>
                           </div>
 
                           <div className="column is-full">
-                            <textarea placeholder="Description of image ..." name="desc" value = {value(it,'desc')} style={{height:'170px'}} onChange={e => handleChange(e, index)}></textarea>
+                            <textarea placeholder="Description of image ..." name="desc" value = {it.desc?it.desc:''} style={{height:'170px'}} onChange={e => handleChange(e, index)}></textarea>
                           </div>
                       </div>
                     )}
