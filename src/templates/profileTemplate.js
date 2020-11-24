@@ -79,7 +79,7 @@ export default (props) => {
               const newArr = data.allImageSharp.edges.map(it => {
                 const originalName = it.node.fluid.originalName.split('.')[0]
                 const jsFound = imagesJson.find(im => im.originalName  === originalName)
-                const showInProfile = (it.name?(it.name.length < 7):true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
+                const showInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
                 if (jsFound===undefined) {
                   return {originalName, node:it.node, showInProfile}
                 } else {
@@ -95,8 +95,8 @@ export default (props) => {
                   console.log('jsonArray:', axiosData.result)
                   const newArr = data.allImageSharp.edges.map(it => {
                       const originalName = it.node.fluid.originalName.split('.')[0]
-                      const showInProfile = (it.name?(it.name.length < 7):true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
                       let jsFound = imagesJson.find(it => it.originalName === originalName);
+                      const showInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
                       if (jsFound === undefined) {
                         jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
                       }  
@@ -153,9 +153,8 @@ export default (props) => {
                 <button className="button" type="reset" disabled style={{backgroundColor:'orange', color:'white'}} onClick={handleReset}>Reset</button>
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
-                    (it.showInProfile===undefined || it.showInProfile && it.showInProfile)?
-                      <div className="column is-4 columns is-multiline">
-                          <div className="column is-full">
+                        <div className="column is-4 columns is-multiline" style={{opacity:it.showInProfile?1.0:0.2}}>
+                          <div className="column is-full" >
                             {it.node.fluid?
                             <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
                             :null}
@@ -207,7 +206,6 @@ export default (props) => {
                               <textarea placeholder="Description of image ..." name="desc" value = {it.desc?it.desc:''} style={{height:'170px'}} onChange={e => handleChange(e, index)}></textarea>
                             </div>
                         </div>
-                    :null
                     )}
                 </div>
               </form>
