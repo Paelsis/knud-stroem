@@ -141,7 +141,7 @@ export default (props) => {
 
             return (
               <div>
-                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} onClick={handleFetchStatic}>Hämta data från statisk fil</button>
+                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} onClick={handleFetchStatic}>Återställ till orginal</button>
                 <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined})), null, "\t")}>
                   <button className="button" style={{backgroundColor:'orange', color:'white'}} >Skicka ändrade data i mail till Per</button>
                 </a>
