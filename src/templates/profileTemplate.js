@@ -113,7 +113,8 @@ export default (props) => {
 
             const handleSubmit = (e) => {
               setButtonColor({...buttonColor, submit:'pink'})
-              const payloadArr =  [...arr, {fluid:undefined} ]
+              const payloadArr =  arr.map(it => ({...it, node:undefined}))
+              console.log('Submit payloadArr:', payloadArr)
               const payload = {
                 fname:REMOTE_FILE,
                 array:payloadArr
@@ -124,9 +125,6 @@ export default (props) => {
               })  
               e.preventDefault();
             }
-
-            
-
 
            const handleReset = (e) => {
               e.preventDefault()
