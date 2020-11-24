@@ -79,10 +79,11 @@ export default (props) => {
               const newArr = data.allImageSharp.edges.map(it => {
                 const originalName = it.node.fluid.originalName.split('.')[0]
                 const jsFound = imagesJson.find(im => im.originalName  === originalName)
-                if (jsFound!==undefined) {
-                  return {...jsFound, node:it.node}
+                const showInProfile = (it.name?(it.name.length < 7):true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
+                if (jsFound===undefined) {
+                  return {originalName, node:it.node, showInProfile}
                 } else {
-                  return {originalName, node:it.node}
+                  return {...jsFound, node:it.node, showInProfile}
                 } 
               }).sort(sortName)
               setArr(newArr)  
@@ -90,21 +91,21 @@ export default (props) => {
 
             const handleFetch = (e) => {
               setButtonColor({...buttonColor, fetch:'pink'})
-
               axiosGet('/getJsonFromFile?fname=' + REMOTE_FILE, (axiosData) => {
                   console.log('jsonArray:', axiosData.result)
                   const newArr = data.allImageSharp.edges.map(it => {
                       const originalName = it.node.fluid.originalName.split('.')[0]
+                      const showInProfile = (it.name?(it.name.length < 7):true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
                       let jsFound = imagesJson.find(it => it.originalName === originalName);
                       if (jsFound === undefined) {
                         jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
                       }  
                       if (jsFound===undefined) {
-                        return {originalName, node:it.node}
+                        return {originalName, node:it.node, showInProfile}
                       } else {
-                        return {...jsFound, node:it.node}
+                        return {...jsFound, node:it.node, showInProfile}
                       }     
-                  }).sort(sortName).filter(it => (it.name?(it.name.length < 7):true) && (!(it.originalName.includes('HISTORY'))) && (!(it.originalName.includes('knud'))) && (!(it.originalName.includes('header')))) 
+                  }).sort(sortName)
                   setButtonColor({...buttonColor, fetch:'orange'})
                   setArr(newArr)  
               })
@@ -112,9 +113,10 @@ export default (props) => {
 
             const handleSubmit = (e) => {
               setButtonColor({...buttonColor, submit:'pink'})
+              const payloadArr =  [...arr, {fluid:undefined} ]
               const payload = {
                 fname:REMOTE_FILE,
-                array:arr
+                array:payloadArr
               }
               axiosPost('/setJsonInFile', payload, (reply) => {
                 setSubmit(submit+1)
@@ -139,7 +141,7 @@ export default (props) => {
 
             return (
               <div>
-                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} disabled onClick={handleFetchStatic}>Hämta data från statisk fil</button>
+                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} onClick={handleFetchStatic}>Hämta data från statisk fil</button>
                 <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined})), null, "\t")}>
                   <button className="button" style={{backgroundColor:'orange', color:'white'}} >Skicka ändrade data i mail till Per</button>
                 </a>
@@ -151,59 +153,61 @@ export default (props) => {
                 <button className="button" type="reset" disabled style={{backgroundColor:'orange', color:'white'}} onClick={handleReset}>Reset</button>
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
-                    <div className="column is-4 columns is-multiline">
-                        <div className="column is-full">
-                          {it.node.fluid?
-                          <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
-                          :null}
-                        </div>  
+                    (it.showInProfile===undefined || it.showInProfile && it.showInProfile)?
+                      <div className="column is-4 columns is-multiline">
                           <div className="column is-full">
-                            <label>File: 
-                              {it.node.fluid.originalName}
-                            </label>
-                          </div>
+                            {it.node.fluid?
+                            <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
+                            :null}
+                          </div>  
+                            <div className="column is-full">
+                              <label>File: 
+                                {it.node.fluid.originalName}
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <label>Name:
-                            <input type="text" placeholder={'Ex: YYYY-NNN'} name = {'name'} value = {it.name?it.name:''} onChange={e => handleChange(e, index)} /> 
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Name:
+                              <input type="text" placeholder={'Ex: YYYY-NNN'} name = {'name'} value = {it.name?it.name:''} onChange={e => handleChange(e, index)} /> 
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <label>Price:
-                            <input type="text" placeholder={'Ex: 100 eur'} name = {'price'} value = {it.price?it.price:''} onChange={e => handleChange(e, index)} />
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Price:
+                              <input type="text" placeholder={'Ex: 100 eur'} name = {'price'} value = {it.price?it.price:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <label>Size:
-                              <input type="text" placeholder={'Ex: width x height'} name = {'size'} value = {it.size?it.size:''} onChange={e => handleChange(e, index)} />
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Size:
+                                <input type="text" placeholder={'Ex: width x height'} name = {'size'} value = {it.size?it.size:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <label>Show on homepage:
-                              <input type="checkbox" name = {'showOnHomepage'} value = {it.showOnHomepage?it.showOnHomepage:''} onChange={e => handleChange(e, index)} />
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Show on homepage:
+                                <input type="checkbox" name = {'showOnHomepage'} value = {it.showOnHomepage?it.showOnHomepage:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
 
 
-                          <div className="column is-full">
-                            <label>Hide this image:
-                              <input type="checkbox" name = {'hidden'} value = {it.checkbox?it.checkbox:''} onChange={e => handleChange(e, index)} />
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Hide this image:
+                                <input type="checkbox" name = {'hidden'} value = {it.checkbox?it.checkbox:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <label>Sequence number:
-                              <input type="number" placeholder={0} style={{width:40}} name = {'sequenceNumber'} value = {it.sequence?it.sequence:''} onChange={e => handleChange(e, index)} />
-                            </label>
-                          </div>
+                            <div className="column is-full">
+                              <label>Sequence number:
+                                <input type="number" placeholder={0} style={{width:40}} name = {'sequenceNumber'} value = {it.sequence?it.sequence:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
 
-                          <div className="column is-full">
-                            <textarea placeholder="Description of image ..." name="desc" value = {it.desc?it.desc:''} style={{height:'170px'}} onChange={e => handleChange(e, index)}></textarea>
-                          </div>
-                      </div>
+                            <div className="column is-full">
+                              <textarea placeholder="Description of image ..." name="desc" value = {it.desc?it.desc:''} style={{height:'170px'}} onChange={e => handleChange(e, index)}></textarea>
+                            </div>
+                        </div>
+                    :null
                     )}
                 </div>
               </form>
