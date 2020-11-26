@@ -88,7 +88,7 @@ module.exports = {
           measurementId: "G-V56RGCYH43"
         },
         loginPath: "/login",
-        loginRedirectPath: "/dashboard",
+        loginRedirectPath: "/app/profile",
         socialLogins: ["google"],
       },
     },
