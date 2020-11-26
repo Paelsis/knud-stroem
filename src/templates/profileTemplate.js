@@ -28,7 +28,7 @@ const CLASS_NAME = {
 export default (props) => {
       const [arr, setArr] = useState([])
       const [submit, setSubmit] = useState(0)
-      const [buttonColor, setButtonColor] = useState({fetch:'orange', submit:'orange'})
+      const [buttonColor, setButtonColor] = useState({fetchStatic:'green', fetch:'green', submit:'green'})
       /*
       useEffect(() => {
         axiosGet('/getJsonFromFile', (data) => data.result.length >= imagesJson.length?setArr(data.result):null)
@@ -76,6 +76,7 @@ export default (props) => {
             }  
 
             const handleFetchStatic = (e) => {
+              setButtonColor({...buttonColor, fetchStatic:'pink'})
               const newArr = data.allImageSharp.edges.map(it => {
                 const originalName = it.node.fluid.originalName.split('.')[0]
                 const jsFound = imagesJson.find(im => im.originalName  === originalName)
@@ -86,6 +87,7 @@ export default (props) => {
                   return {...jsFound, node:it.node, showInProfile}
                 } 
               }).sort(sortName)
+              setButtonColor({...buttonColor, fetchStatic:'pink'})
               setArr(newArr)  
             }
 
@@ -95,7 +97,7 @@ export default (props) => {
                   console.log('jsonArray:', axiosData.result)
                   const newArr = data.allImageSharp.edges.map(it => {
                       const originalName = it.node.fluid.originalName.split('.')[0]
-                      let jsFound = imagesJson.find(it => it.originalName === originalName);
+                      let jsFound = axiosData.result.find(it => it.originalName === originalName);
                       const showInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
                       if (jsFound === undefined) {
                         jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
@@ -106,24 +108,25 @@ export default (props) => {
                         return {...jsFound, node:it.node, showInProfile}
                       }     
                   }).sort(sortName)
-                  setButtonColor({...buttonColor, fetch:'orange'})
+                  setButtonColor({...buttonColor, fetch:'green'})
                   setArr(newArr)  
               })
             }
 
             const handleSubmit = (e) => {
+              e.preventDefault(e)
+              alert('Submit')
               setButtonColor({...buttonColor, submit:'pink'})
-              const payloadArr =  arr.map(it => ({...it, node:undefined}))
-              console.log('Submit payloadArr:', payloadArr)
+              const array = arr.map(it => ({...it, node:undefined}))
+              console.log('Submit payload, array:', array)
               const payload = {
                 fname:REMOTE_FILE,
-                array:payloadArr
+                array,
               }
               axiosPost('/setJsonInFile', payload, (reply) => {
                 setSubmit(submit+1)
-                setButtonColor({...buttonColor, submit:'orange'})
+                setButtonColor({...buttonColor, submit:'green'})
               })  
-              e.preventDefault();
             }
 
            const handleReset = (e) => {
@@ -139,16 +142,18 @@ export default (props) => {
 
             return (
               <div>
-                <button className="button" type="button" style={{backgroundColor:'orange', color:'white'}} onClick={handleFetchStatic}>Återställ till orginal</button>
+                <button className="button" type="button" style={{backgroundColor:'green', color:'white'}} onClick={handleFetchStatic}>Återställ till orginal</button>
                 <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined})), null, "\t")}>
-                  <button className="button" style={{backgroundColor:'orange', color:'white'}} >Skicka ändrade data i mail till Per</button>
+                  <button className="button" style={{backgroundColor:'green', color:'white'}} >Skicka ändrade data i mail till Per</button>
                 </a>
-              <p />
+                <p />   
               <OpacityText title={"KNUDS CHANGES"} text={"HERE KNUD CHANGE THE INFO ABOUT HIS IMAGES AND SEND THEM TO PÄLZ"} />
               <form onSubmit={handleSubmit}>
                 <button className="button" type="button" style={{backgroundColor:buttonColor.fetch, color:'white'}} onClick={handleFetch}>Hämta</button>
                 <button className="button" type="submit" style={{backgroundColor:buttonColor.submit, color:'white'}} >Spara</button>
-                <button className="button" type="reset" disabled style={{backgroundColor:'orange', color:'white'}} onClick={handleReset}>Reset</button>
+                <button className="button" type="reset" disabled style={{backgroundColor:'green', color:'white'}} onClick={handleReset}>Reset</button>
+                <p />
+                <p />
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
                         <div className="column is-4 columns is-multiline" style={{opacity:it.showInProfile?1.0:0.2}}>

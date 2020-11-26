@@ -65,6 +65,9 @@ const TEXTS = {
 
 const Func = ({galleries,language, setLanguage, loggedIn}) => {
   const [objActive, setObjActive] = useState({})
+  const [hover, setHover] = useState({})
+  const handleMouseEnter = (name) => setHover({...hover, [name]:true})
+  const handleMouseLeave = (name) => setHover({...hover, [name]:undefined})
   const toggleHamburger = (e) => {
     setObjActive({active:!objActive.active, navBarActiveClass:!objActive.active?'is-active':''})
   }
@@ -81,7 +84,7 @@ const Func = ({galleries,language, setLanguage, loggedIn}) => {
   const lastGalleryYear = galleries[galleries.length-1]
 return(
 
-<nav class="navbar is-full"  role="navigation" aria-label="main navigation">
+<nav class="navbar is-full"  role="navigation" aria-label="main navigation" >
   <div
     className={`navbar-burger burger ${objActive.navBarActiveClass}`}
     data-target="navMenu"
