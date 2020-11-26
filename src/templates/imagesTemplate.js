@@ -75,7 +75,7 @@ export default () => {
                     {open === index?
                       <small>{imageJson?imageJson.name + ' / ' + imageJson.price + ' / ' + imageJson.size:null}</small>
                     :  
-                      <small>{it.imageJson.name?it.imageJson.name + ' / ' + it.node.fluid.originalName:'(Filename:' + it.node.fluid.originalName + ')'}</small>
+                      <small>{it.imageJson.name?it.imageJson.name:it.node.fluid.originalName?'(Filename:' + it.node.fluid.originalName + ')':null}</small>
                     }  
                     </div>
                 )}

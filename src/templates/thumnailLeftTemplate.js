@@ -127,7 +127,7 @@ const Template = (props) => {
                             {imageJson.name?imageJson.name:"No text"}
                             </small>
                             <br />
-                            <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{imageJson.size}&nbsp;{TEXTS.PRICE[props.language]}:{imageJson.price}&nbsp;File:{imageJson.originalName}</small>
+                            <small style={{fontWeight:100}}>{TEXTS.SIZE[props.language]}:{imageJson.size}&nbsp;{TEXTS.PRICE[props.language]}:{imageJson.price}</small>
                           </figcaption>
                         :null}
                       </figure>
