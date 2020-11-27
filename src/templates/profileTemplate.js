@@ -80,11 +80,11 @@ export default (props) => {
               const newArr = data.allImageSharp.edges.map(it => {
                 const originalName = it.node.fluid.originalName.split('.')[0]
                 const jsFound = imagesJson.find(im => im.originalName  === originalName)
-                const showInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
-                if (jsFound===undefined) {
-                  return {originalName, node:it.node, showInProfile}
+                const activeInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
+                if (jsFound) {
+                  return {...jsFound, node:it.node, activeInProfile}
                 } else {
-                  return {...jsFound, node:it.node, showInProfile}
+                  return {originalName, node:it.node, activeInProfile}
                 } 
               }).sort(sortName)
               setButtonColor({...buttonColor, fetchStatic:'pink'})
@@ -97,15 +97,12 @@ export default (props) => {
                   console.log('jsonArray:', axiosData.result)
                   const newArr = data.allImageSharp.edges.map(it => {
                       const originalName = it.node.fluid.originalName.split('.')[0]
-                      let jsFound = axiosData.result.find(it => it.originalName === originalName);
-                      const showInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
-                      if (jsFound === undefined) {
-                        jsFound = axiosData.result.find(ax => ax.originalName  === originalName)
-                      }  
-                      if (jsFound===undefined) {
-                        return {originalName, node:it.node, showInProfile}
+                      const jsFound = axiosData.result.find(ax => ax.originalName === originalName);
+                      const activeInProfile = (jsFound?jsFound.name?(jsFound.name.length < 7):true:true) && (!(originalName.includes('HISTORY'))) && (!(originalName.includes('knud'))) && (!(originalName.includes('header'))) 
+                      if (jsFound) {
+                        return {...jsFound, node:it.node, activeInProfile}
                       } else {
-                        return {...jsFound, node:it.node, showInProfile}
+                        return {originalName, node:it.node, activeInProfile}
                       }     
                   }).sort(sortName)
                   setButtonColor({...buttonColor, fetch:'green'})
@@ -117,7 +114,7 @@ export default (props) => {
               e.preventDefault(e)
               alert('Submit')
               setButtonColor({...buttonColor, submit:'pink'})
-              const array = arr.map(it => ({...it, node:undefined}))
+              const array = arr.map(it => ({...it, node:undefined, activeInProfile:undefined}))
               console.log('Submit payload, array:', array)
               const payload = {
                 fname:REMOTE_FILE,
@@ -143,7 +140,7 @@ export default (props) => {
             return (
               <div>
                 <button className="button" type="button" style={{backgroundColor:'green', color:'white'}} onClick={handleFetchStatic}>Återställ till orginal</button>
-                <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined})), null, "\t")}>
+                <a href={"mailto:paelsis@hotmail.com?subject=Bildere&body=" + JSON.stringify(arr.map(it => ({...it, node:undefined, activeInProfile:undefined})), null, "\t")}>
                   <button className="button" style={{backgroundColor:'green', color:'white'}} >Skicka ändrade data i mail till Per</button>
                 </a>
                 <p />   
@@ -156,12 +153,10 @@ export default (props) => {
                 <p />
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
-                        <div className="column is-4 columns is-multiline" style={{opacity:it.showInProfile?1.0:0.2}}>
-                          <div className="column is-full" >
-                            {it.node.fluid?
-                            <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
-                            :null}
-                          </div>  
+                        <div className="column is-4 columns is-left is-multiline" style={{opacity:it.activeInProfile?1.0:0.4, fontStyle:it.activeInProfile?'normal':'oblique', fontWeight:it.activeInProfile?'normal':'lighter'}}>
+                          <div className={it.activeInProfile?"column is-full":"column is-10 "} >
+                            {it.node.fluid?<Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />:null}
+                          </div >  
                             <div className="column is-full">
                               <label>File: 
                                 {it.node.fluid.originalName}
