@@ -154,8 +154,10 @@ export default (props) => {
                 <div className="columns is-multiline" >
                   {arr.map((it, index)=>
                         <div className="column is-4 columns is-left is-multiline" style={{opacity:it.activeInProfile?1.0:0.4, fontStyle:it.activeInProfile?'normal':'oblique', fontWeight:it.activeInProfile?'normal':'lighter'}}>
-                          <div className={it.activeInProfile?"column is-full":"column is-10 "} >
-                            {it.node.fluid?<Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />:null}
+                          <div className={it.activeInProfile?"column is-full":"column is-10 "}>
+                            {it.node.fluid?
+                              <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
+                            :null}
                           </div >  
                             <div className="column is-full">
                               <label>File: 

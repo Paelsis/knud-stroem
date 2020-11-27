@@ -71,7 +71,11 @@ export default () => {
                     onMouseLeave={()=>handleHover(undefined)}
                     onClick={()=>setOpen(open?undefined:index)}
                   >
-                    <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
+                    <div  style={{position:'relative'}}>
+                      <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
+                      <div style={{position:'absolute', bottom:4, right:8, fontSize:'x-small', color:'black'}}>Photo:Magnus Jönsson</div>  
+                    </div>
+
                     {open === index?
                       <small>{imageJson?imageJson.name + ' / ' + imageJson.price + ' / ' + imageJson.size:null}</small>
                     :  

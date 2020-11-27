@@ -78,7 +78,13 @@ export default () => {
             <div className='columns'>
 
               <div className='column is-half'>
-              {fluid?<Img fluid={fluid} backgroundColor={"grey"} style={{cursor:'pointer'}} />:null}
+              {fluid?
+              <div  style={{position:'relative'}}>
+                <Img fluid={fluid} backgroundColor={"grey"} style={{cursor:'pointer'}} />
+                <div style={{position:'absolute', bottom:6, right:8, fontSize:'x-small', color:'white'}}>Photo:Magnus Jönsson</div>  
+              </div>
+      
+              :null}
               </div>  
               <div className="column">
                 <form action="/action_page.php" onSubmit={handleSubmit}>

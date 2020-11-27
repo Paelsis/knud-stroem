@@ -59,7 +59,12 @@ export default (props) => {
                         style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >
-                        {fluid?<Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}}/>:null}  
+                        {fluid?                                                 
+                          <div  style={{position:'relative'}}>
+                            <Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}}/>
+                            <div style={{position:'absolute', bottom:6, right:8, fontSize:'x-small', color:'white'}}>Photo:Magnus Jönsson</div>  
+                          </div>
+                        :null}  
                       </div>
                       <div 
                           className="column is-6 is-offset-1"
