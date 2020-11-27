@@ -55,14 +55,14 @@ export default (props) => {
                 {data.allMarkdownRemark.nodes.filter((it) => it.frontmatter.language === props.language).map((it, index) =>
                   <div>
                     <div className="columns">
-                      <div className="column is-one-third is-offset-1" 
+                      <div className="column is-5" 
                         style={{backgroundColor:hover['div1']?undefined:undefined, transition:'2000ms all ease'}} 
                         onMouseLeave={()=>handleMouseLeave('div1')}
                       >
                         {fluid?<Img fluid={fluid(index)} backgroundColor={"grey"} style={{cursor:'pointer'}}/>:null}  
                       </div>
                       <div 
-                          className="column is-5 is-offset-2"
+                          className="column is-6 is-offset-1"
                           onMouseEnter={()=>handleMouseEnter('div2')}
                           onMouseLeave={()=>handleMouseLeave('div2')}
                       >
