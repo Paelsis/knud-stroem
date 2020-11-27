@@ -184,6 +184,12 @@ export default (props) => {
                             </div>
 
                             <div className="column is-full">
+                              <label>Photo by:
+                                <input type="text" placeholder={'Ex: Magnus Jönsson'} name = {'photo'} value = {it.photo?it.photo:''} onChange={e => handleChange(e, index)} />
+                              </label>
+                            </div>
+
+                            <div className="column is-full">
                               <label>Show on homepage:
                                 <input type="checkbox" name = {'showOnHomepage'} value = {it.showOnHomepage?it.showOnHomepage:''} onChange={e => handleChange(e, index)} />
                               </label>

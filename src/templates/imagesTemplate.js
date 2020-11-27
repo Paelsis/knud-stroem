@@ -73,7 +73,9 @@ export default () => {
                   >
                     <div  style={{position:'relative'}}>
                       <Img fluid={it.node.fluid} backgroundColor={backgroundColor} style={{cursor:'pointer'}} />
-                      <div style={{position:'absolute', bottom:4, right:8, fontSize:'x-small', color:'black'}}>Photo:Magnus Jönsson</div>  
+                      {open?
+                      <div style={{position:'absolute', opacity:0.5, bottom:4, right:8, fontSize:'x-small', color:'black'}}>Photo:{it.photo?it.photo:'Magnus Jönsson'}</div>  
+                      :null}
                     </div>
 
                     {open === index?

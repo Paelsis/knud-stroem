@@ -122,7 +122,7 @@ const Template = (props) => {
                       <figure>
                         <div style={{position:'relative'}}>
                           <Img fluid={fluid} backgroundColor={backgroundColor} style={{width:'auto', objectFit:'cover'}}/>
-                          <div style={{position:'absolute', bottom:4, right:8, fontSize:'xx-small', color:'black'}}>Photo:Magnus Jönsson</div>  
+                          <div style={{position:'absolute', opacity:0.4, bottom:4, right:8, fontSize:'xx-small', color:'black'}}>Photo:{imageJson.photo?imageJson.photo:'Magnus Jönsson'}</div>  
                         </div>
 
                         {imageJson?
