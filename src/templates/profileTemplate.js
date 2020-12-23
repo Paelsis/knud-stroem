@@ -4,8 +4,6 @@ import Img from 'gatsby-image'
 import imagesJson from '../../src/images/images.json'
 import OpacityText from '../components/OpacityText'
 import {axiosGet, axiosPost} from "../functions/axios"
-import { FormatSize } from "@material-ui/icons"
-import images from "../pages/images"
 
 const backgroundColor="#FF7034"
 const REMOTE_FILE='images.json'

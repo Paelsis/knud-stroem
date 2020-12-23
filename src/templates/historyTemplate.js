@@ -1,11 +1,25 @@
 import React, {useState} from "react"
 import { graphql, StaticQuery } from "gatsby"
 import Img from 'gatsby-image'
-import Layout from "../components/layout"
 import variables from "../components/layout.scss" 
 
 const src = `https://source.unsplash.com/random/600x600`  
 const bblack = '#2b2523'
+const videoSrcURL = '../videos/knud_video1.MP4'
+
+const showVideo = () =>
+  <div className="video">
+  <iframe
+    src={videoSrcURL}
+    title={'Knud the painter'}
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    frameBorder="0"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+  />
+  </div>
+
 
 export default (props) => {
   const [hover, setHover] = useState({})
@@ -76,7 +90,8 @@ export default (props) => {
                           <div dangerouslySetInnerHTML={{ __html:it.html}} />
                       </div>
                     </div>
-                    <div style={{color:'white', height:20}} />            
+                    <div style={{color:'white', height:20}} />        
+                          
                   </div>
                 )}
               </>

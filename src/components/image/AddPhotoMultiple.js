@@ -6,7 +6,11 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import CancelIcon from '@material-ui/icons/Cancel';
 import JSONPretty from 'react-json-pretty';
 
-const apiBaseUrl = process.env.REACT_APP_API_BASE_URL
+const PRODUCTION_API_BASE_URL='https://www.tangokompaniet.com/app/slim/public'
+const apiBaseUrl = process?process.env?process.env.GATSBY_API_BASE_URL?process.env.GATSBY_API_BASE_URL
+    :PRODUCTION_API_BASE_URL
+    :PRODUCTION_API_BASE_URL
+    :PRODUCTION_API_BASE_URL
 
 const butColor ='#AAA' 
 
