@@ -36,6 +36,7 @@ const Layout = ({ children }) => {
       <div class="container is-widescreen">
         <main style={{paddingLeft:10, paddingRight:10}}>{children}</main>
         <footer style={{fontWeight:100, fontSize:8, marginTop: `2rem`}}>
+          &nbsp;&nbsp;
           © {new Date().getFullYear()}, 
           {` `}
           <a href="mailto:knud55@outlook.com?subject=Mail från Knuds WEB-site">Knud Strøm Nielsen</a>
